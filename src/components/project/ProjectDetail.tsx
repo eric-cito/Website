@@ -1,4 +1,5 @@
 import type { GraphNode } from '../../data/nodes'
+import { withBase } from '../../utils/baseUrl'
 
 interface ProjectDetailProps {
   node: GraphNode
@@ -32,7 +33,7 @@ export default function ProjectDetail({ node, onBack }: ProjectDetailProps) {
         <figure className="mb-8 -mx-6 sm:mx-0 rounded-lg overflow-hidden bg-slate-800/50 ring-1 ring-slate-700/50">
           {detail.image ? (
             <img
-              src={detail.image}
+              src={withBase(detail.image)}
               alt=""
               className="w-full aspect-video object-cover"
               loading="lazy"
@@ -40,7 +41,7 @@ export default function ProjectDetail({ node, onBack }: ProjectDetailProps) {
           ) : pdfLink ? (
             <>
               <iframe
-                src={`${pdfLink.url}#view=FitH`}
+                src={`${pdfLink.url.startsWith('/') ? withBase(pdfLink.url) : pdfLink.url}#view=FitH`}
                 title={pdfLink.label}
                 className="w-full aspect-video border-0"
               />
