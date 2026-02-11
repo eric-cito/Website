@@ -35,6 +35,10 @@ jobs:
           # User site (repo "owner.github.io") → base "/"; project site → base "/repo-name/"
           VITE_BASE_URL: ${{ github.event.repository.name == format('{0}.github.io', github.repository_owner) && '/' || format('/{0}/', github.event.repository.name) }}
 
+      # GitHub Pages serves 404.html for unknown paths; use SPA so refresh/direct links work
+      - name: Copy index to 404
+        run: cp dist/index.html dist/404.html
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

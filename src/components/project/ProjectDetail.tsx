@@ -40,12 +40,35 @@ export default function ProjectDetail({ node, onBack }: ProjectDetailProps) {
             />
           ) : pdfLink ? (
             <>
-              <iframe
-                src={`${pdfLink.url.startsWith('/') ? withBase(pdfLink.url) : pdfLink.url}#view=FitH`}
-                title={pdfLink.label}
-                className="w-full aspect-video border-0"
-              />
-              <figcaption className="sr-only">{pdfLink.label}</figcaption>
+              {(() => {
+                const pdfSrc = pdfLink.url.startsWith('/') ? withBase(pdfLink.url) : pdfLink.url
+                const pdfUrl = `${pdfSrc}#view=FitH`
+                return (
+                  <>
+                    <object
+                      data={pdfUrl}
+                      type="application/pdf"
+                      title={pdfLink.label}
+                      className="w-full aspect-video border-0 min-h-[20rem]"
+                    >
+                      <p className="p-4 text-slate-400 text-sm">
+                        PDF cannot be displayed in this browser.{' '}
+                        <a href={pdfSrc} target="_blank" rel="noopener noreferrer" className="text-accent underline">
+                          Open {pdfLink.label}
+                        </a>
+                      </p>
+                    </object>
+                    <a
+                      href={pdfSrc}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-2 inline-block text-sm text-accent hover:underline"
+                    >
+                      Open PDF in new tab →
+                    </a>
+                  </>
+                )
+              })()}
             </>
           ) : null}
         </figure>
