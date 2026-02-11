@@ -39,6 +39,9 @@ jobs:
       - name: Copy index to 404
         run: cp dist/index.html dist/404.html
 
+      - name: List dist (verify public assets)
+        run: ls -la dist && ls -la dist/images 2>/dev/null || true
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

@@ -1,20 +1,30 @@
 /**
- * Base path for the app (e.g. "" at root, "Website" on GitHub Pages project site).
- * Uses Vite's BASE_URL at build time, with runtime fallback only on GitHub Pages.
+ * Base path segment for the app (e.g. "" at root, "Website" on GitHub Pages).
+ * On *.github.io we always derive from pathname so assets load reliably.
  */
 function getBasePath(): string {
-  const fromEnv = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '')
-  if (fromEnv && fromEnv !== '/') return fromEnv
-  // Runtime fallback only on GitHub Pages: first path segment is repo name
-  if (typeof window === 'undefined') return ''
-  if (!window.location.hostname.endsWith('.github.io')) return ''
-  const match = window.location.pathname.match(/^\/([^/]+)/)
-  return match ? match[1] : ''
+  if (typeof window === 'undefined') {
+    return (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '').replace(/^\//, '') || ''
+  }
+  // On GitHub Pages project site, first path segment is the repo name
+  if (window.location.hostname.endsWith('.github.io')) {
+    const match = window.location.pathname.match(/^\/([^/]+)/)
+    if (match && match[1] && match[1] !== '404.html') return match[1]
+  }
+  return (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '').replace(/^\//, '') || ''
 }
 
-/** Full absolute URL for an asset so it loads on GitHub Pages (e.g. /Website/images/foo.jpg) */
+/**
+ * Full URL for a public asset (images, PDFs). Uses origin + base + path so it
+ * always loads on GitHub Pages project sites (e.g. /Website/images/foo.jpg).
+ */
 export function withBase(assetPath: string): string {
   const base = getBasePath()
   const p = assetPath.startsWith('/') ? assetPath.slice(1) : assetPath
-  return base ? `/${base}/${p}` : `/${p}`
+  const path = base ? `/${base}/${p}` : `/${p}`
+  // Use full URL so browser resolves correctly from any page
+  if (typeof window !== 'undefined') {
+    return new URL(path, window.location.origin).href
+  }
+  return path
 }
