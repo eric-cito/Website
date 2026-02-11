@@ -5,9 +5,12 @@ import HomePage from './pages/home/HomePage'
 import ProjectPage from './pages/project/ProjectPage'
 import CVPage from './pages/cv/CVPage'
 
+// Vite sets BASE_URL from config base (e.g. /Website/ on GitHub Pages)
+const basename = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '')
+
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <VisitedNodesProvider>
         <Routes>
           <Route path="/" element={<Layout />}>
