@@ -20,17 +20,17 @@ export default function ProjectDetail({ node, onBack }: ProjectDetailProps) {
   const pdfLink = detail.links?.find((l) => isPdfUrl(l.url))
 
   return (
-    <article className="max-w-2xl mx-auto px-6 py-12">
+    <article className="max-w-2xl mx-auto px-4 sm:px-6 py-8 sm:py-12 pb-24">
       <button
         type="button"
         onClick={onBack}
-        className="text-accent hover:underline text-sm mb-8 inline-flex items-center gap-2"
+        className="text-accent hover:underline text-sm mb-6 sm:mb-8 inline-flex items-center gap-2 min-h-[44px] items-center touch-manipulation"
         aria-label="Back to brain graph"
       >
         ← Back to brain
       </button>
       {(detail.image || pdfLink) && (
-        <figure className="mb-8 -mx-6 sm:mx-0 rounded-lg overflow-hidden bg-slate-800/50 ring-1 ring-slate-700/50">
+        <figure className="mb-6 sm:mb-8 -mx-4 sm:-mx-6 sm:mx-0 rounded-lg overflow-hidden bg-slate-800/50 ring-1 ring-slate-700/50">
           {detail.image ? (
             <img
               src={withBase(detail.image)}
@@ -77,7 +77,7 @@ export default function ProjectDetail({ node, onBack }: ProjectDetailProps) {
         <span className="text-xs uppercase tracking-wider text-slate-500">
           {type === 'experience' ? 'Experience' : 'Project'}
         </span>
-        <h1 className="font-heading font-bold text-3xl text-white mt-1">
+        <h1 className="font-heading font-bold text-2xl sm:text-3xl text-white mt-1">
           {title}
         </h1>
         {detail.date && (
@@ -107,14 +107,14 @@ export default function ProjectDetail({ node, onBack }: ProjectDetailProps) {
           </p>
         )}
         {detail.links && detail.links.length > 0 && (
-          <div className="mt-6 flex flex-wrap gap-4">
+          <div className="mt-6 flex flex-wrap gap-3 sm:gap-4">
             {detail.links.map((link) => (
               <a
                 key={link.url}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent hover:underline"
+                className="text-accent hover:underline py-2 min-h-[44px] sm:min-h-0 flex items-center touch-manipulation"
               >
                 {link.label} →
               </a>

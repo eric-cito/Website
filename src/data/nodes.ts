@@ -173,7 +173,7 @@ export const nodes: GraphNode[] = [
     detail: {
       description: 'HER2-targeting antibodies and molecular imaging for cancer.',
       longDescription: 'Conducted research on HER2-targeting antibodies, studying how bioconjugation levels affect radiotracer synthesis and immunoreactivity. Synthesized immunoconjugates, purified via size-exclusion chromatography, and quantified DFO-to-antibody ratios. Found immunoreactivity stable with 60-fold DFO excess while association rate decreased. First Place at Weill Cornell Medicine Catalyst Program Poster Session.',
-      date: 'June 2017 – Sep 2017',
+      date: 'June 2018 – Sep 2018',
       skills: ['Lab Techniques', 'Chromatography', 'Bioconjugation'],
       links: [{ label: 'Catalyst Program poster (PDF)', url: '/Poster_ECS_Sai_Fixed.pdf' }],
     },

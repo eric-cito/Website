@@ -182,12 +182,23 @@ function createNeuronMesh(node: GraphNode, isHighlight: boolean, isVisited: bool
   return group
 }
 
+function useReducedMotion() {
+  const [reduced, setReduced] = useState(() => typeof window !== 'undefined' && window.innerWidth < 768)
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    const fn = () => setReduced(mq.matches)
+    mq.addEventListener('change', fn)
+    return () => mq.removeEventListener('change', fn)
+  }, [])
+  return reduced
+}
+
 export default function NeuronGraph() {
   const navigate = useNavigate()
-  // Ref typed loosely so layout/zoom effects can call d3Force/zoomToFit
   const fgRef = useRef<{ d3Force?: (n: string) => { distance: (n: number) => void }; d3ReheatSimulation?: () => void; zoomToFit?: (d: number, p: number) => void; refresh?: () => void } | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null)
+  const reducedMotion = useReducedMotion()
   const { visitedNodeIds, addVisited, clearTriggeredAt } = useVisitedNodes()
 
   const handleNodeClick = useCallback(
@@ -304,7 +315,7 @@ export default function NeuronGraph() {
   return (
     <div
       ref={containerRef}
-      className="absolute inset-0 w-full h-full min-h-[70vh] graph-entrance"
+      className="absolute inset-0 w-full h-full min-h-[240px] sm:min-h-[70vh] graph-entrance"
       role="application"
       aria-label="3D neuron graph of projects and experiences. Click a node to open that project or experience."
     >
@@ -320,9 +331,9 @@ export default function NeuronGraph() {
         }
         linkColor={linkColor}
         linkWidth={1}
-        linkDirectionalParticles={3}
+        linkDirectionalParticles={reducedMotion ? 1 : 3}
         linkDirectionalParticleSpeed={0.01}
-        linkDirectionalParticleWidth={0.6}
+        linkDirectionalParticleWidth={reducedMotion ? 0.5 : 0.6}
         backgroundColor="rgba(10, 10, 15, 0)"
         showNavInfo={false}
       />
