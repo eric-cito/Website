@@ -270,17 +270,19 @@ export default function NeuronGraph() {
       }
     }
     setLayout()
-    // After simulation settles, zoom to fit (smaller padding = more zoomed in)
+    // After simulation settles, zoom to fit. On mobile use more padding so the graph stays centered.
+    const isNarrow = typeof window !== 'undefined' && window.innerWidth < 768
+    const padding = isNarrow ? 45 : 18
     const zoomTimer = setTimeout(() => {
       const graph = fgRef.current
       if (graph?.zoomToFit) {
-        graph.zoomToFit(400, 18)
+        graph.zoomToFit(400, padding)
       }
     }, 1200)
     return () => clearTimeout(zoomTimer)
   }, [])
 
-  // On real container resize only: refresh and re-center. Skip first run so initial zoom (from effect above) stays.
+  // On resize: refresh and re-center. Use larger padding on narrow viewports so graph stays centered.
   useEffect(() => {
     const container = containerRef.current
     if (!container) return
@@ -301,7 +303,11 @@ export default function NeuronGraph() {
       clearTimeout(zoomTimeoutId)
       zoomTimeoutId = setTimeout(() => {
         requestAnimationFrame(() => {
-          if (fgRef.current?.zoomToFit) fgRef.current.zoomToFit(250, 18)
+          const g = fgRef.current
+          if (g?.zoomToFit) {
+            const padding = w < 768 ? 45 : 18
+            g.zoomToFit(250, padding)
+          }
         })
       }, 80)
     })

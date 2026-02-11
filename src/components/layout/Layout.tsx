@@ -55,15 +55,15 @@ export default function Layout() {
       <main className="flex-1 min-h-0 pt-14 sm:pt-16 min-w-0 overflow-auto">
         <Outlet />
       </main>
-      <footer className="shrink-0 px-4 sm:px-6 py-4 sm:py-6 border-t border-slate-800/50 flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-between gap-4 text-sm text-slate-500 safe-area-inset-bottom">
+      <footer className="shrink-0 px-4 sm:px-6 py-4 sm:py-6 border-t border-slate-800/50 flex flex-row flex-wrap items-center justify-between gap-3 sm:gap-6 text-sm text-slate-500 safe-area-inset-bottom">
         <button
           type="button"
           onClick={clearMemory}
-          className="hover:text-accent transition-colors py-2 min-h-[44px] sm:min-h-0 touch-manipulation text-left"
+          className="hover:text-accent transition-colors py-2 min-h-[44px] sm:min-h-0 touch-manipulation"
         >
           Clear memory
         </button>
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-6">
+        <div className="flex flex-row flex-wrap gap-3 sm:gap-6">
           <a href="mailto:eric.cito@ucsf.edu" className="hover:text-accent transition-colors py-1 min-h-[44px] sm:min-h-0 flex items-center touch-manipulation">
             eric.cito@ucsf.edu
           </a>
