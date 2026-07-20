@@ -8,7 +8,7 @@ const BURST_SIZE = 4
 const BURST_SPACING_MS = 180
 const QUIESCENCE_MS = 1600
 const MAX_RIPPLES = 12
-const BRAIN_ASPECT = 0.8 // height/width of the brain bounding box
+const BRAIN_ASPECT = 0.9 // height/width of the brain bounding box
 
 interface Ripple {
   x: number
@@ -38,26 +38,49 @@ function quadTangent(p0: Point, c: Point, p1: Point, t: number): Point {
   return { x: dx / len, y: dy / len }
 }
 
-// Lateral (side-view, facing left) brain silhouette in normalized coords.
-// Each segment: [c1x, c1y, c2x, c2y, x, y] for bezierCurveTo from the previous point.
-const BRAIN_START: [number, number] = [0.04, 0.46]
+// Mid-sagittal brain in normalized coords (frontal pole left, brainstem below).
+// Outline segments: [c1x, c1y, c2x, c2y, x, y] for bezierCurveTo from the previous point.
+const BRAIN_START: [number, number] = [0.03, 0.44]
 const BRAIN_OUTLINE: number[][] = [
-  [0.05, 0.28, 0.16, 0.1, 0.34, 0.06], // frontal lobe rising to superior margin
-  [0.5, 0.02, 0.68, 0.04, 0.82, 0.16], // crown / parietal
-  [0.93, 0.26, 0.98, 0.38, 0.94, 0.48], // occipital pole
-  [0.93, 0.55, 0.91, 0.58, 0.88, 0.6], // gentle taper toward the notch
-  [0.92, 0.66, 0.87, 0.75, 0.76, 0.76], // cerebellum
-  [0.71, 0.77, 0.67, 0.74, 0.64, 0.7], // brainstem junction
-  [0.58, 0.75, 0.48, 0.78, 0.38, 0.74], // temporal lobe underside
-  [0.26, 0.7, 0.16, 0.65, 0.12, 0.57], // temporal pole
-  [0.07, 0.53, 0.04, 0.5, 0.04, 0.46], // close at frontal pole
+  [0.03, 0.26, 0.14, 0.09, 0.31, 0.06], // frontal lobe up to the superior margin
+  [0.45, 0.02, 0.63, 0.03, 0.76, 0.12], // vertex / crown
+  [0.88, 0.2, 0.95, 0.31, 0.95, 0.43], // parietal into occipital
+  [0.95, 0.5, 0.94, 0.54, 0.92, 0.57], // occipital pole
+  [0.96, 0.62, 0.95, 0.71, 0.86, 0.75], // cerebellum, posterior-inferior
+  [0.78, 0.79, 0.68, 0.78, 0.63, 0.74], // cerebellum to brainstem junction
+  [0.6, 0.82, 0.585, 0.9, 0.575, 0.98], // brainstem, posterior edge
+  [0.555, 0.99, 0.532, 0.99, 0.515, 0.98], // medulla
+  [0.513, 0.88, 0.508, 0.8, 0.5, 0.72], // brainstem, anterior edge
+  [0.45, 0.69, 0.37, 0.67, 0.3, 0.64], // inferior surface, forward
+  [0.2, 0.62, 0.1, 0.56, 0.06, 0.5], // orbital surface
+  [0.04, 0.48, 0.03, 0.46, 0.03, 0.44], // close at the frontal pole
 ]
-// Interior sulci hints: [startX, startY, then one bezier segment]
+// Corpus callosum: the crescent arcing over the third ventricle.
+const CORPUS_CALLOSUM_START: [number, number] = [0.33, 0.44]
+const CORPUS_CALLOSUM: number[][] = [
+  [0.33, 0.33, 0.42, 0.27, 0.53, 0.27], // genu, rising
+  [0.63, 0.27, 0.69, 0.32, 0.7, 0.39], // body to splenium
+  [0.71, 0.43, 0.68, 0.45, 0.65, 0.44], // splenium, underside
+  [0.64, 0.38, 0.6, 0.34, 0.53, 0.34], // inner arc, returning
+  [0.45, 0.34, 0.39, 0.38, 0.38, 0.45], // inner genu
+  [0.37, 0.47, 0.34, 0.47, 0.33, 0.44], // close
+]
+// Open strokes: [startX, startY, then one bezier segment]
 const BRAIN_SULCI: number[][] = [
-  [0.46, 0.08, 0.48, 0.2, 0.44, 0.28, 0.4, 0.36], // central sulcus
-  [0.14, 0.52, 0.26, 0.48, 0.4, 0.5, 0.52, 0.56], // lateral (Sylvian) fissure
-  [0.8, 0.2, 0.78, 0.28, 0.74, 0.34, 0.72, 0.4], // parieto-occipital sulcus
+  [0.3, 0.4, 0.34, 0.24, 0.5, 0.18, 0.66, 0.26], // cingulate sulcus
+  [0.5, 0.06, 0.52, 0.16, 0.49, 0.22, 0.46, 0.3], // central sulcus
+  [0.82, 0.16, 0.79, 0.26, 0.75, 0.32, 0.7, 0.38], // parieto-occipital sulcus
+  [0.14, 0.3, 0.2, 0.28, 0.24, 0.32, 0.26, 0.38], // superior frontal sulcus
+  [0.93, 0.56, 0.85, 0.585, 0.75, 0.6, 0.66, 0.63], // tentorium, over the cerebellum
 ]
+// Arbor vitae: the branching white matter inside the cerebellum.
+const CEREBELLAR_ARBOR: number[][] = [
+  [0.7, 0.655, 0.76, 0.63, 0.81, 0.625, 0.86, 0.635],
+  [0.7, 0.655, 0.76, 0.665, 0.81, 0.675, 0.87, 0.685],
+  [0.7, 0.655, 0.745, 0.7, 0.78, 0.72, 0.83, 0.735],
+]
+// Thalamus, the deep grey mass the lead targets: [cx, cy, rx, ry]
+const THALAMUS: [number, number, number, number] = [0.55, 0.5, 0.075, 0.055]
 
 interface BrainBox {
   x0: number
@@ -80,11 +103,11 @@ function computeGeometry(w: number, h: number): Geometry {
   const narrow = w < 640
   const s = Math.max(
     180,
-    narrow ? Math.min(w * 0.78, h * 0.42) : Math.min(w * 0.5, h * 0.62, 560)
+    narrow ? Math.min(w * 0.7, h * 0.34) : Math.min(w * 0.5, h * 0.62, 560)
   )
   const cx = narrow ? w * 0.56 : w * 0.68
   // On narrow screens the brain sits above the copy instead of behind it
-  const cy = narrow ? h * 0.22 : h * 0.44
+  const cy = narrow ? h * 0.15 : h * 0.44
   const brain: BrainBox = { x0: cx - s / 2, y0: cy - (s * BRAIN_ASPECT) / 2, s }
 
   const bx = (nx: number) => brain.x0 + nx * s
@@ -92,12 +115,12 @@ function computeGeometry(w: number, h: number): Geometry {
 
   // Lead enters through the top of the viewport and the crown of the skull,
   // curving down to a deep target near the center of the brain.
-  const leadP0 = { x: bx(0.38), y: -10 }
-  const leadC = { x: bx(0.46), y: by(0.12) }
-  const leadP1 = { x: bx(0.47), y: by(0.52) }
+  const leadP0 = { x: bx(0.32), y: -10 }
+  const leadC = { x: bx(0.42), y: by(0.1) }
+  const leadP1 = { x: bx(0.53), y: by(0.52) }
   const contacts = CONTACT_TS.map((t) => quadPoint(leadP0, leadC, leadP1, t))
 
-  return { brain, leadP0, leadC, leadP1, contacts, maxRadius: s * 0.3 }
+  return { brain, leadP0, leadC, leadP1, contacts, maxRadius: s * 0.24 }
 }
 
 function traceBrainPath(ctx: CanvasRenderingContext2D, brain: BrainBox, segments: number[][], start?: [number, number]) {
@@ -118,9 +141,13 @@ function traceBrainPath(ctx: CanvasRenderingContext2D, brain: BrainBox, segments
 }
 
 function drawScene(ctx: CanvasRenderingContext2D, geo: Geometry) {
-  // Brain silhouette
+  const { brain } = geo
+  const bx = (nx: number) => brain.x0 + nx * brain.s
+  const by = (ny: number) => brain.y0 + ny * brain.s * BRAIN_ASPECT
   ctx.lineCap = 'round'
-  traceBrainPath(ctx, geo.brain, BRAIN_OUTLINE, BRAIN_START)
+
+  // Cortex + brainstem silhouette
+  traceBrainPath(ctx, brain, BRAIN_OUTLINE, BRAIN_START)
   ctx.closePath()
   ctx.fillStyle = `rgba(${ACCENT}, 0.05)`
   ctx.fill()
@@ -128,10 +155,29 @@ function drawScene(ctx: CanvasRenderingContext2D, geo: Geometry) {
   ctx.lineWidth = 1.75
   ctx.stroke()
 
-  // Sulci hints
+  // Corpus callosum
+  traceBrainPath(ctx, brain, CORPUS_CALLOSUM, CORPUS_CALLOSUM_START)
+  ctx.closePath()
+  ctx.fillStyle = `rgba(${ACCENT}, 0.06)`
+  ctx.fill()
+  ctx.strokeStyle = `rgba(${OUTLINE}, 0.45)`
+  ctx.lineWidth = 1.4
+  ctx.stroke()
+
+  // Thalamus — the deep target the lead is aimed at
+  const [tcx, tcy, trx, try_] = THALAMUS
+  ctx.beginPath()
+  ctx.ellipse(bx(tcx), by(tcy), trx * brain.s, try_ * brain.s * BRAIN_ASPECT, 0, 0, Math.PI * 2)
+  ctx.strokeStyle = `rgba(${OUTLINE}, 0.4)`
+  ctx.lineWidth = 1.3
+  ctx.stroke()
+
+  // Sulci and cerebellar arbor vitae
   ctx.strokeStyle = `rgba(${OUTLINE}, 0.28)`
   ctx.lineWidth = 1.2
-  traceBrainPath(ctx, geo.brain, BRAIN_SULCI)
+  traceBrainPath(ctx, brain, BRAIN_SULCI)
+  ctx.stroke()
+  traceBrainPath(ctx, brain, CEREBELLAR_ARBOR)
   ctx.stroke()
 
   // Lead
