@@ -3,7 +3,7 @@ import SectionHeading from './SectionHeading'
 
 export default function SkillsSection() {
   return (
-    <section className="px-4 sm:px-6 max-w-5xl mx-auto w-full">
+    <section className="px-4 sm:px-6 max-w-5xl mx-auto w-full pb-16">
       <SectionHeading id="skills" title="Skills" />
       <div className="grid gap-6 sm:grid-cols-2">
         {skillGroups.map(({ group, items }) => (

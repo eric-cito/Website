@@ -55,16 +55,6 @@ const BRAIN_OUTLINE: number[][] = [
   [0.2, 0.62, 0.1, 0.56, 0.06, 0.5], // orbital surface
   [0.04, 0.48, 0.03, 0.46, 0.03, 0.44], // close at the frontal pole
 ]
-// Corpus callosum: the crescent arcing over the third ventricle.
-const CORPUS_CALLOSUM_START: [number, number] = [0.33, 0.44]
-const CORPUS_CALLOSUM: number[][] = [
-  [0.33, 0.33, 0.42, 0.27, 0.53, 0.27], // genu, rising
-  [0.63, 0.27, 0.69, 0.32, 0.7, 0.39], // body to splenium
-  [0.71, 0.43, 0.68, 0.45, 0.65, 0.44], // splenium, underside
-  [0.64, 0.38, 0.6, 0.34, 0.53, 0.34], // inner arc, returning
-  [0.45, 0.34, 0.39, 0.38, 0.38, 0.45], // inner genu
-  [0.37, 0.47, 0.34, 0.47, 0.33, 0.44], // close
-]
 // Open strokes: [startX, startY, then one bezier segment]
 const BRAIN_SULCI: number[][] = [
   [0.3, 0.4, 0.34, 0.24, 0.5, 0.18, 0.66, 0.26], // cingulate sulcus
@@ -79,8 +69,6 @@ const CEREBELLAR_ARBOR: number[][] = [
   [0.7, 0.655, 0.76, 0.665, 0.81, 0.675, 0.87, 0.685],
   [0.7, 0.655, 0.745, 0.7, 0.78, 0.72, 0.83, 0.735],
 ]
-// Thalamus, the deep grey mass the lead targets: [cx, cy, rx, ry]
-const THALAMUS: [number, number, number, number] = [0.55, 0.5, 0.075, 0.055]
 
 interface BrainBox {
   x0: number
@@ -142,8 +130,6 @@ function traceBrainPath(ctx: CanvasRenderingContext2D, brain: BrainBox, segments
 
 function drawScene(ctx: CanvasRenderingContext2D, geo: Geometry) {
   const { brain } = geo
-  const bx = (nx: number) => brain.x0 + nx * brain.s
-  const by = (ny: number) => brain.y0 + ny * brain.s * BRAIN_ASPECT
   ctx.lineCap = 'round'
 
   // Cortex + brainstem silhouette
@@ -153,23 +139,6 @@ function drawScene(ctx: CanvasRenderingContext2D, geo: Geometry) {
   ctx.fill()
   ctx.strokeStyle = `rgba(${OUTLINE}, 0.6)`
   ctx.lineWidth = 1.75
-  ctx.stroke()
-
-  // Corpus callosum
-  traceBrainPath(ctx, brain, CORPUS_CALLOSUM, CORPUS_CALLOSUM_START)
-  ctx.closePath()
-  ctx.fillStyle = `rgba(${ACCENT}, 0.06)`
-  ctx.fill()
-  ctx.strokeStyle = `rgba(${OUTLINE}, 0.45)`
-  ctx.lineWidth = 1.4
-  ctx.stroke()
-
-  // Thalamus — the deep target the lead is aimed at
-  const [tcx, tcy, trx, try_] = THALAMUS
-  ctx.beginPath()
-  ctx.ellipse(bx(tcx), by(tcy), trx * brain.s, try_ * brain.s * BRAIN_ASPECT, 0, 0, Math.PI * 2)
-  ctx.strokeStyle = `rgba(${OUTLINE}, 0.4)`
-  ctx.lineWidth = 1.3
   ctx.stroke()
 
   // Sulci and cerebellar arbor vitae

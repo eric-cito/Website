@@ -3,7 +3,7 @@ import SectionHeading from './SectionHeading'
 
 export default function ContactSection() {
   return (
-    <section className="px-4 sm:px-6 max-w-3xl mx-auto w-full pb-16">
+    <section className="px-4 sm:px-6 max-w-3xl mx-auto w-full">
       <SectionHeading id="contact" title="Contact" />
       <p className="text-slate-600 mb-6 max-w-xl">
         Open to roles in machine learning, health AI, neurotechnology, and biotech —

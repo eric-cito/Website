@@ -18,8 +18,7 @@ export default function HeroSection() {
         </p>
         <p className="text-slate-500 text-sm sm:text-base max-w-xl leading-relaxed mb-8">
           I build deep learning models, medical imaging pipelines, and analysis
-          tools — from segmentation networks in the operating-room workflow to
-          outlier detection across a 12,000-participant dataset.
+          tools.
         </p>
         <div className="flex flex-wrap gap-3">
           <Link
