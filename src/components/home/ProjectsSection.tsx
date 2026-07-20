@@ -8,7 +8,7 @@ export default function ProjectsSection() {
       <SectionHeading id="projects" title="Projects" />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {projectNodes.map((node) => (
-          <NodeCard key={node.id} node={node} variant="project" />
+          <NodeCard key={node.id} node={node} />
         ))}
       </div>
     </section>

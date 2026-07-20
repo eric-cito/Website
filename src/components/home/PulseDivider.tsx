@@ -56,15 +56,15 @@ export default function PulseDivider() {
         viewBox={`0 0 ${WIDTH} 52`}
         preserveAspectRatio="xMidYMid meet"
         className="w-full h-10 sm:h-12"
-        style={{ filter: 'drop-shadow(0 0 6px rgba(8, 145, 178, 0.25))' }}
+        style={{ filter: 'drop-shadow(0 0 6px rgba(14, 154, 167, 0.25))' }}
       >
         <defs>
           <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stopColor="#0891b2" stopOpacity="0" />
-            <stop offset="0.15" stopColor="#0891b2" stopOpacity="0.6" />
-            <stop offset="0.5" stopColor="#0891b2" stopOpacity="0.9" />
-            <stop offset="0.85" stopColor="#0891b2" stopOpacity="0.6" />
-            <stop offset="1" stopColor="#0891b2" stopOpacity="0" />
+            <stop offset="0" stopColor="#0E9AA7" stopOpacity="0" />
+            <stop offset="0.15" stopColor="#0E9AA7" stopOpacity="0.6" />
+            <stop offset="0.5" stopColor="#0E9AA7" stopOpacity="0.9" />
+            <stop offset="0.85" stopColor="#0E9AA7" stopOpacity="0.6" />
+            <stop offset="1" stopColor="#0E9AA7" stopOpacity="0" />
           </linearGradient>
         </defs>
         <path
@@ -78,7 +78,7 @@ export default function PulseDivider() {
         <path
           d={TRAIN_PATH}
           fill="none"
-          stroke="#06b6d4"
+          stroke="#3DBFCB"
           strokeWidth={2}
           strokeLinecap="round"
           strokeLinejoin="round"

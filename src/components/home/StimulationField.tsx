@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react'
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion'
 
-const ACCENT = '8, 145, 178'
-const OUTLINE = '71, 85, 105'
+const ACCENT = '14, 154, 167'
+const OUTLINE = '11, 18, 32'
 const RIPPLE_SPEED = 30 // px/s
 const BURST_SIZE = 4
 const BURST_SPACING_MS = 180
@@ -308,7 +308,7 @@ export default function StimulationField() {
         aria-hidden
         style={{
           background:
-            'radial-gradient(ellipse at 30% 45%, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.4) 55%, rgba(255, 255, 255, 0.05) 100%)',
+            'radial-gradient(ellipse at 30% 45%, rgba(247, 249, 249, 0.92) 0%, rgba(247, 249, 249, 0.4) 55%, rgba(247, 249, 249, 0.05) 100%)',
         }}
       />
     </>

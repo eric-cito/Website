@@ -8,17 +8,26 @@ export default {
     extend: {
       fontFamily: {
         heading: ['Syne', 'sans-serif'],
-        body: ['Inter', 'system-ui', 'sans-serif'],
+        body: ['"IBM Plex Sans"', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
       },
       colors: {
-        accent: {
-          DEFAULT: '#0e7490',
-          bright: '#0891b2',
-        },
         surface: {
           DEFAULT: '#f8fafc',
           light: '#f1f5f9',
         },
+        paper: '#F7F9F9',
+        ink: {
+          DEFAULT: '#0B1220',
+          soft: '#3D4A5C',
+          faint: '#7A8699',
+        },
+        signal: {
+          DEFAULT: '#0E9AA7',
+          dim: '#0A6E78',
+        },
+        spike: '#FF6A3D',
+        line: '#D8DEE2',
       },
       keyframes: {
         'stim-ping': {

@@ -6,6 +6,8 @@ export interface NodeDetail {
   links?: { label: string; url: string }[]
   date?: string
   skills?: string[]
+  /** Conferences, symposia, or poster sessions where this work was presented */
+  conferences?: string[]
 }
 
 export interface PortfolioNode {
@@ -30,9 +32,10 @@ export const nodes: PortfolioNode[] = [
     href: '/project/ucsf-lab',
     detail: {
       description: 'Deep learning segmentation and quantitative MRI reconstruction pipelines for surgical planning.',
-      longDescription: 'Co-developing a 2D U-Net model that automatically segments implanted DBS electrodes from postoperative MRI, and a modular Quantitative Susceptibility Mapping (QSM) reconstruction pipeline used for surgical targeting. Work spans the full pipeline: DICOM ingestion, preprocessing, model training and evaluation, and packaging the result into something clinicians can actually run. Collaborating with MRI technicians on acquisition and protocol verification. Two abstracts submitted to ISMRM 2026.',
+      longDescription: 'Co-developing a 2D U-Net model that automatically segments implanted DBS electrodes from postoperative CT, and a modular Quantitative Susceptibility Mapping (QSM) reconstruction pipeline used for surgical targeting. Work spans the full pipeline: DICOM ingestion, preprocessing, model training and evaluation, and packaging the result into something clinicians can actually run. Collaborating with MRI technicians on acquisition and protocol verification. Two abstracts submitted to ISMRM 2026.',
       date: 'July 2025 – Present',
       skills: ['Python', 'PyTorch', 'U-Net', 'QSM', 'DICOM', 'SimpleITK'],
+      conferences: ['ISMRM 2026', 'MDS Congress 2026', 'UCSF Research AI Day', 'UCSF PROPEL Symposium'],
       links: [{ label: 'morrisonlab.ucsf.edu', url: 'https://morrisonlab.ucsf.edu' }],
     },
   },
@@ -48,6 +51,7 @@ export const nodes: PortfolioNode[] = [
       longDescription: 'Built an outlier detection pipeline using Deep Isolation Forest (DIF) over resting-state fMRI from the ABCD Study, covering 12,000 participants. Developed quantitative diagnostic metrics and traced sources of variability across the dataset — regional hotspots, scanner-vendor discrepancies, and framewise displacement — turning a noisy multi-site dataset into something models could be trusted on. Presented at IEEE Brain Discovery, the CAMP Symposium, and the UC San Diego Summer Research Conference.',
       date: 'Nov 2023 – May 2025',
       skills: ['Python', 'PyTorch', 'Deep Isolation Forest', 'fMRI', 'Statistics'],
+      conferences: ['IEEE Brain Discovery', 'CAMP Symposium', 'UC San Diego Summer Research Conference'],
       links: [],
     },
   },
@@ -93,7 +97,38 @@ export const nodes: PortfolioNode[] = [
       longDescription: 'Studied how bioconjugation levels affect radiotracer synthesis and immunoreactivity in HER2-targeting antibodies. Synthesized immunoconjugates, purified them via size-exclusion chromatography, and quantified DFO-to-antibody ratios. Found immunoreactivity held stable at 60-fold DFO excess while the association rate decreased — a usable ceiling for conjugation. First Place at the Weill Cornell Medicine Catalyst Program Poster Session.',
       date: 'June 2018 – Sep 2018',
       skills: ['Bioconjugation', 'Chromatography', 'Radiochemistry', 'Assay Design'],
+      conferences: ['Weill Cornell Medicine Catalyst Program Poster Session'],
       links: [{ label: 'Catalyst Program poster (PDF)', url: '/Poster_ECS_Sai_Fixed.pdf' }],
+    },
+  },
+  {
+    id: 'dbs-electrode-segmentation',
+    title: 'DBS Electrode Segmentation',
+    shortDescription: 'A 2D U-Net that automatically segments implanted DBS electrodes from postoperative CT',
+    type: 'project',
+    tags: ['Deep Learning', 'Medical Imaging', 'PyTorch', 'U-Net'],
+    href: '/project/dbs-electrode-segmentation',
+    detail: {
+      description: 'A 2D U-Net model that automatically segments implanted DBS electrodes from postoperative CT.',
+      longDescription: 'Co-developed a 2D U-Net that segments implanted DBS electrodes directly from postoperative CT, replacing manual electrode localization with an automated pipeline covering DICOM ingestion, preprocessing, and model training and evaluation. Built to run in a form clinicians can actually use for surgical planning, developed alongside MRI technicians on acquisition and protocol verification.',
+      date: 'July 2025 – Present',
+      skills: ['Python', 'PyTorch', 'U-Net', 'DICOM', 'SimpleITK'],
+      links: [{ label: 'morrisonlab.ucsf.edu', url: 'https://morrisonlab.ucsf.edu' }],
+    },
+  },
+  {
+    id: 'qsm-reconstruction-pipeline',
+    title: 'QSM Reconstruction Pipeline',
+    shortDescription: 'A modular Quantitative Susceptibility Mapping pipeline for DBS surgical targeting',
+    type: 'project',
+    tags: ['Medical Imaging', 'QSM', 'Python', 'MRI'],
+    href: '/project/qsm-reconstruction-pipeline',
+    detail: {
+      description: 'A modular Quantitative Susceptibility Mapping (QSM) reconstruction pipeline used for surgical targeting.',
+      longDescription: 'Built a modular QSM reconstruction pipeline used for DBS surgical targeting, spanning DICOM ingestion, preprocessing, and reconstruction, packaged so clinicians can run it directly. Developed alongside MRI technicians to verify acquisition and protocol.',
+      date: 'July 2025 – Present',
+      skills: ['Python', 'QSM', 'DICOM', 'SimpleITK'],
+      links: [{ label: 'morrisonlab.ucsf.edu', url: 'https://morrisonlab.ucsf.edu' }],
     },
   },
   {
@@ -145,18 +180,20 @@ export const nodes: PortfolioNode[] = [
     },
   },
   {
-    id: 'fortune-website',
-    title: 'Fortune Telling Website',
-    shortDescription: 'Collaborative web app built in a team of six',
+    id: 'weill-cornell-poster',
+    title: 'Weill Cornell Catalyst Poster',
+    shortDescription: 'HER2 immunoconjugate poster — First Place, Weill Cornell Catalyst Program',
     type: 'project',
-    tags: ['JavaScript', 'Web Development', 'UI/UX'],
-    href: '/project/fortune-website',
+    tags: ['Biotech', 'Assay Development', 'Analytical Chemistry'],
+    href: '/project/weill-cornell-poster',
     detail: {
-      description: 'An interactive web app built collaboratively with JavaScript, HTML, and CSS.',
-      longDescription: 'Team software engineering project covering the full development cycle: design, implementation, code review, and deployment. Focused on front-end interaction design and a UI that stays responsive across devices.',
-      image: '/images/fortune-website.jpg',
-      skills: ['JavaScript', 'HTML', 'CSS', 'Git', 'UI/UX'],
-      links: [{ label: 'View project', url: 'https://cse110-sp23-group26.github.io' }],
+      description: 'Quantitative bioconjugation and binding assays for targeted cancer imaging agents.',
+      longDescription: 'Studied how bioconjugation levels affect radiotracer synthesis and immunoreactivity in HER2-targeting antibodies. Synthesized immunoconjugates, purified them via size-exclusion chromatography, and quantified DFO-to-antibody ratios. Found immunoreactivity held stable at 60-fold DFO excess while the association rate decreased — a usable ceiling for conjugation. First Place at the Weill Cornell Medicine Catalyst Program Poster Session.',
+      date: 'June 2018 – Sep 2018',
+      image: '/images/weill-cornell-poster.jpg',
+      skills: ['Bioconjugation', 'Chromatography', 'Radiochemistry', 'Assay Design'],
+      conferences: ['Weill Cornell Medicine Catalyst Program Poster Session'],
+      links: [{ label: 'Catalyst Program poster (PDF)', url: '/Poster_ECS_Sai_Fixed.pdf' }],
     },
   },
   {
