@@ -100,7 +100,7 @@ export const nodes: PortfolioNode[] = [
   },
   {
     id: 'ucsf-lab',
-    title: 'UCSF Neuromodulation Lab',
+    title: 'UCSF Neuromodulation Imaging Lab',
     shortDescription: 'QSM & DBS imaging pipeline',
     type: 'experience',
     tags: ['Research', 'Machine Learning', 'Neuro'],

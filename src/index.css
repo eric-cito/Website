@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --color-bg: #0a0a0f;
-  --color-surface: #0f172a;
-  --color-accent: #22d3ee;
+  --color-bg: #ffffff;
+  --color-surface: #f8fafc;
+  --color-accent: #0e7490;
   --color-accent-dim: #0891b2;
 }
 
@@ -30,7 +30,7 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   background: var(--color-bg);
-  color: #e2e8f0;
+  color: #334155;
   font-family: 'Inter', system-ui, sans-serif;
   -webkit-tap-highlight-color: transparent;
 }

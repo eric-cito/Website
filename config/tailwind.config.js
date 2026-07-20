@@ -12,12 +12,12 @@ export default {
       },
       colors: {
         accent: {
-          DEFAULT: '#22d3ee',
-          dim: '#0891b2',
+          DEFAULT: '#0e7490',
+          bright: '#0891b2',
         },
         surface: {
-          DEFAULT: '#0f172a',
-          light: '#1e293b',
+          DEFAULT: '#f8fafc',
+          light: '#f1f5f9',
         },
       },
       keyframes: {

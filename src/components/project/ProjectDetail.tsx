@@ -30,7 +30,7 @@ export default function ProjectDetail({ node, onBack }: ProjectDetailProps) {
         ← Back
       </button>
       {(detail.image || pdfLink) && (
-        <figure className="mb-6 sm:mb-8 -mx-4 sm:-mx-6 sm:mx-0 rounded-lg overflow-hidden bg-slate-800/50 ring-1 ring-slate-700/50">
+        <figure className="mb-6 sm:mb-8 -mx-4 sm:-mx-6 sm:mx-0 rounded-lg overflow-hidden bg-slate-100 ring-1 ring-slate-200">
           {detail.image ? (
             <img
               src={withBase(detail.image)}
@@ -51,7 +51,7 @@ export default function ProjectDetail({ node, onBack }: ProjectDetailProps) {
                       title={pdfLink.label}
                       className="w-full aspect-video border-0 min-h-[20rem]"
                     >
-                      <p className="p-4 text-slate-400 text-sm">
+                      <p className="p-4 text-slate-500 text-sm">
                         PDF cannot be displayed in this browser.{' '}
                         <a href={pdfSrc} target="_blank" rel="noopener noreferrer" className="text-accent underline">
                           Open {pdfLink.label}
@@ -77,7 +77,7 @@ export default function ProjectDetail({ node, onBack }: ProjectDetailProps) {
         <span className="text-xs uppercase tracking-wider text-slate-500">
           {type === 'experience' ? 'Experience' : 'Project'}
         </span>
-        <h1 className="font-heading font-bold text-2xl sm:text-3xl text-white mt-1">
+        <h1 className="font-heading font-bold text-2xl sm:text-3xl text-slate-900 mt-1">
           {title}
         </h1>
         {detail.date && (
@@ -88,7 +88,7 @@ export default function ProjectDetail({ node, onBack }: ProjectDetailProps) {
             {tags.map((tag) => (
               <span
                 key={tag}
-                className="px-2 py-0.5 rounded bg-slate-800 text-slate-400 text-xs"
+                className="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-xs"
               >
                 {tag}
               </span>
@@ -96,13 +96,13 @@ export default function ProjectDetail({ node, onBack }: ProjectDetailProps) {
           </div>
         )}
       </header>
-      <div className="prose prose-invert prose-slate max-w-none">
-        <p className="text-slate-300 leading-relaxed">
+      <div className="prose prose-slate max-w-none">
+        <p className="text-slate-700 leading-relaxed">
           {detail.longDescription ?? detail.description}
         </p>
         {detail.skills && detail.skills.length > 0 && (
           <p className="text-slate-500 text-sm mt-4">
-            <span className="font-medium text-slate-400">Skills:</span>{' '}
+            <span className="font-medium text-slate-600">Skills:</span>{' '}
             {detail.skills.join(', ')}
           </p>
         )}
