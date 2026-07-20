@@ -8,7 +8,7 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-[calc(100dvh-3.5rem)] sm:min-h-[calc(100dvh-4rem)] flex flex-col">
       <StimulationField />
-      <div className="relative z-10 flex-1 flex flex-col justify-center px-4 sm:px-6 max-w-5xl mx-auto w-full py-10">
+      <div className="relative z-10 flex-1 flex flex-col justify-start lg:justify-center pt-72 lg:pt-10 pb-10 px-4 sm:px-6 max-w-5xl mx-auto w-full">
         <p className="font-mono text-signal text-xs sm:text-sm tracking-widest uppercase mb-3">
           Machine Learning · Health AI · Neurotechnology
         </p>

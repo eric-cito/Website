@@ -89,13 +89,13 @@ const CONTACT_TS = [0.72, 0.81, 0.9, 0.99]
 
 function computeGeometry(w: number, h: number): Geometry {
   const narrow = w < 1024
-  const s = Math.max(
-    180,
-    narrow ? Math.min(w * 0.7, h * 0.34) : Math.min(w * 0.5, h * 0.62, 560)
-  )
+  // Narrow: size and vertical position depend only on width, not section
+  // height, so the brain never clips at the top and always sits within a
+  // predictable pixel band the hero copy can reserve space for below it.
+  const s = Math.max(180, narrow ? Math.min(w * 0.62, 260) : Math.min(w * 0.5, h * 0.62, 560))
   const cx = narrow ? w * 0.6 : w * 0.74
   // On narrow screens the brain sits above the copy instead of behind it
-  const cy = narrow ? h * 0.15 : h * 0.44
+  const cy = narrow ? s * 0.45 + 28 : h * 0.44
   const brain: BrainBox = { x0: cx - s / 2, y0: cy - (s * BRAIN_ASPECT) / 2, s }
 
   const bx = (nx: number) => brain.x0 + nx * s
