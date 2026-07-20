@@ -88,7 +88,7 @@ interface Geometry {
 const CONTACT_TS = [0.72, 0.81, 0.9, 0.99]
 
 function computeGeometry(w: number, h: number): Geometry {
-  const narrow = w < 640
+  const narrow = w < 1024
   const s = Math.max(
     180,
     narrow ? Math.min(w * 0.7, h * 0.34) : Math.min(w * 0.5, h * 0.62, 560)
