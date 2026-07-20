@@ -24,7 +24,7 @@ export default function HeroSection() {
             <span className="sm:whitespace-nowrap">
               Currently Research Associate at UCSF Neuromodulation Imaging Lab
             </span>{' '}
-            <span className="whitespace-nowrap">· Computer Engineering B.S.</span>
+            <span className="whitespace-nowrap">University of Califonia San Diego Computer Engineering B.S.</span>
           </p>
         </div>
         <div className="flex flex-wrap gap-3">

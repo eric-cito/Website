@@ -38,7 +38,7 @@ export const nodes: PortfolioNode[] = [
   },
   {
     id: 'salk-lab',
-    title: 'Salk Computational Neurobiology',
+    title: 'Salk Computational Neurobiology Lab',
     shortDescription: 'Anomaly detection across a 12,000-participant dataset',
     type: 'experience',
     tags: ['Machine Learning', 'Anomaly Detection', 'Data Pipelines', 'Python'],
@@ -83,7 +83,7 @@ export const nodes: PortfolioNode[] = [
   },
   {
     id: 'weill-cornell',
-    title: 'Weill Cornell / MSK Lewis Lab',
+    title: 'Weill Cornell / Memorial Sloan Kettering Lewis Lab',
     shortDescription: 'Quantitative assays for targeted cancer therapeutics',
     type: 'experience',
     tags: ['Biotech', 'Assay Development', 'Analytical Chemistry'],
