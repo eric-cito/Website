@@ -13,14 +13,20 @@ export default function HeroSection() {
         <h1 className="font-heading font-bold text-4xl sm:text-6xl text-slate-900 mb-4">
           Eric Cito
         </h1>
-        <p className="text-slate-700 text-base sm:text-lg max-w-xl leading-relaxed mb-2">
-          Machine learning and research engineering for medicine. Currently a
-          Research Associate at the UCSF Neuromodulation Imaging Lab.
-        </p>
-        <p className="text-slate-500 text-sm sm:text-base max-w-xl leading-relaxed mb-8">
-          I build deep learning models, medical imaging pipelines, and analysis
-          tools.
-        </p>
+        <div className="relative max-w-xl pl-6 mb-8">
+          <span className="absolute left-0 top-0 text-accent" aria-hidden>
+            ❯
+          </span>
+          <p className="text-slate-700 text-base sm:text-lg leading-relaxed">
+            Machine learning for health and neurotechnology
+          </p>
+          <p className="text-slate-500 text-sm sm:text-base leading-relaxed">
+            <span className="sm:whitespace-nowrap">
+              Currently Research Associate at UCSF Neuromodulation Imaging Lab
+            </span>{' '}
+            <span className="whitespace-nowrap">· Computer Engineering B.S.</span>
+          </p>
+        </div>
         <div className="flex flex-wrap gap-3">
           <Link
             to="/#experience"
