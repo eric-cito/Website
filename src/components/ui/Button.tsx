@@ -4,7 +4,7 @@ import type { AnchorHTMLAttributes, ReactNode } from 'react'
 type Variant = 'outline' | 'solid'
 
 const base =
-  'inline-flex items-center justify-center gap-2 px-5 py-3 rounded-sm font-mono text-sm tracking-wide transition-colors min-h-[48px] touch-manipulation'
+  'inline-flex items-center justify-center gap-2 px-2.5 sm:px-5 py-3 rounded-sm font-mono text-xs sm:text-sm tracking-wide transition-colors min-h-[48px] touch-manipulation'
 
 const variants: Record<Variant, string> = {
   outline: 'border border-line text-ink hover:border-signal hover:text-signal',
