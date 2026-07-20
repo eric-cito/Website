@@ -3,18 +3,31 @@ import SectionHeading from './SectionHeading'
 import { LinkButton } from '../ui/Button'
 import Tag from '../ui/Tag'
 import { skillGroups } from '../../data/skills'
+import { withBase } from '../../utils/baseUrl'
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[calc(100dvh-3.5rem)] sm:min-h-[calc(100dvh-4rem)] flex flex-col">
-      <StimulationField />
-      <div className="relative z-10 flex-1 flex flex-col justify-start lg:justify-center pt-72 lg:pt-10 pb-10 px-4 sm:px-6 max-w-5xl mx-auto w-full">
+    <section className="relative lg:min-h-[calc(100dvh-4rem)] flex flex-col">
+      <div className="absolute inset-0 hidden lg:block">
+        <StimulationField />
+      </div>
+      <div className="relative z-10 flex flex-col lg:flex-1 lg:justify-center py-6 lg:py-10 px-4 sm:px-6 max-w-5xl mx-auto w-full">
         <p className="font-mono text-signal text-xs sm:text-sm tracking-widest uppercase mb-3">
           Machine Learning · Health AI · Neurotechnology
         </p>
-        <h1 className="font-heading font-semibold text-4xl sm:text-6xl text-ink mb-4 tracking-tight">
-          Eric Cito
-        </h1>
+        <div className="flex flex-wrap items-center gap-4 mb-4">
+          <img
+            src={withBase('/images/headshot.jpg')}
+            alt="Eric Cito"
+            className="h-16 w-16 sm:h-28 sm:w-28 rounded-full object-cover border-2 border-line"
+          />
+          <h1 className="font-heading font-semibold text-4xl sm:text-6xl text-ink tracking-tight">
+            Eric Cito
+          </h1>
+          <div className="lg:hidden">
+            <StimulationField compact />
+          </div>
+        </div>
         <div className="max-w-xl mb-8">
           <p className="text-ink-soft text-base sm:text-lg leading-relaxed">
             Machine learning for health and neurotechnology
@@ -32,7 +45,7 @@ export default function HeroSection() {
           <LinkButton to="/cv" variant="solid">View CV</LinkButton>
         </div>
       </div>
-      <div className="relative z-10 px-4 sm:px-6 max-w-5xl mx-auto w-full pt-6 pb-8">
+      <div className="relative z-10 px-4 sm:px-6 max-w-5xl mx-auto w-full pt-2 lg:pt-6 pb-8">
         <SectionHeading id="skills" title="Skills" />
         <div className="grid gap-x-8 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
           {skillGroups.map(({ group, items }) => (

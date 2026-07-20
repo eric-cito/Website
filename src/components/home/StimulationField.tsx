@@ -87,15 +87,15 @@ interface Geometry {
 
 const CONTACT_TS = [0.72, 0.81, 0.9, 0.99]
 
-function computeGeometry(w: number, h: number): Geometry {
-  const narrow = w < 1024
-  // Narrow: size and vertical position depend only on width, not section
-  // height, so the brain never clips at the top and always sits within a
-  // predictable pixel band the hero copy can reserve space for below it.
-  const s = Math.max(180, narrow ? Math.min(w * 0.62, 260) : Math.min(w * 0.5, h * 0.62, 560))
-  const cx = narrow ? w * 0.6 : w * 0.74
-  // On narrow screens the brain sits above the copy instead of behind it
-  const cy = narrow ? s * 0.45 + 28 : h * 0.44
+function computeGeometry(w: number, h: number, compact: boolean): Geometry {
+  // Compact: a small inline badge (e.g. next to the headshot on mobile) —
+  // the whole scene is centered and scaled to fill the box, no separate
+  // width/height weighting needed since the box is roughly square.
+  const s = compact
+    ? Math.min(w, h / BRAIN_ASPECT) * 0.92
+    : Math.max(180, Math.min(w * 0.5, h * 0.62, 560))
+  const cx = compact ? w / 2 : w * 0.74
+  const cy = compact ? h / 2 : h * 0.44
   const brain: BrainBox = { x0: cx - s / 2, y0: cy - (s * BRAIN_ASPECT) / 2, s }
 
   const bx = (nx: number) => brain.x0 + nx * s
@@ -157,14 +157,20 @@ function drawScene(ctx: CanvasRenderingContext2D, geo: Geometry) {
   ctx.quadraticCurveTo(geo.leadC.x, geo.leadC.y, geo.leadP1.x, geo.leadP1.y)
   ctx.stroke()
 
-  // Contacts
+  // Contacts — sized relative to brain scale, but capped by the actual gap
+  // between adjacent contacts so they stay 4 distinct marks at any size
+  // instead of merging into one blob in compact mode.
+  const contactScale = Math.max(0.35, brain.s / 560)
+  const gaps = geo.contacts.slice(1).map((pt, i) => Math.hypot(pt.x - geo.contacts[i].x, pt.y - geo.contacts[i].y))
+  const minGap = Math.min(...gaps)
+  const contactReach = Math.min(4 * contactScale, minGap * 0.4)
   ctx.strokeStyle = `rgba(${ACCENT}, 0.95)`
-  ctx.lineWidth = 4.5
+  ctx.lineWidth = Math.min(4.5 * contactScale, contactReach * 1.6)
   geo.contacts.forEach((pt, i) => {
     const dir = quadTangent(geo.leadP0, geo.leadC, geo.leadP1, CONTACT_TS[i])
     ctx.beginPath()
-    ctx.moveTo(pt.x - dir.x * 4, pt.y - dir.y * 4)
-    ctx.lineTo(pt.x + dir.x * 4, pt.y + dir.y * 4)
+    ctx.moveTo(pt.x - dir.x * contactReach, pt.y - dir.y * contactReach)
+    ctx.lineTo(pt.x + dir.x * contactReach, pt.y + dir.y * contactReach)
     ctx.stroke()
   })
 }
@@ -179,12 +185,18 @@ function drawRipple(ctx: CanvasRenderingContext2D, ripple: Ripple, maxRadius: nu
   ctx.stroke()
 }
 
+interface StimulationFieldProps {
+  /** Render as a small square inline badge instead of a full-bleed background. */
+  compact?: boolean
+}
+
 /**
- * Hero background: a stylized brain with an implanted DBS lead emitting ripple
- * rings from its contacts in stimulation bursts. Static single frame under
+ * A stylized brain with an implanted DBS lead emitting ripple rings from its
+ * contacts in stimulation bursts. Used both as the hero background and, in
+ * compact mode, as a small inline badge. Static single frame under
  * prefers-reduced-motion.
  */
-export default function StimulationField() {
+export default function StimulationField({ compact = false }: StimulationFieldProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const reducedMotion = usePrefersReducedMotion()
 
@@ -196,7 +208,7 @@ export default function StimulationField() {
 
     let width = 0
     let height = 0
-    let geo = computeGeometry(1, 1)
+    let geo = computeGeometry(1, 1, compact)
 
     const drawStaticFrame = () => {
       ctx.clearRect(0, 0, width, height)
@@ -214,7 +226,7 @@ export default function StimulationField() {
       canvas.width = Math.round(width * dpr)
       canvas.height = Math.round(height * dpr)
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-      geo = computeGeometry(width, height)
+      geo = computeGeometry(width, height, compact)
     }
     resize()
     const observer = new ResizeObserver(() => {
@@ -297,7 +309,11 @@ export default function StimulationField() {
       intersection.disconnect()
       document.removeEventListener('visibilitychange', onVisibilityChange)
     }
-  }, [reducedMotion])
+  }, [reducedMotion, compact])
+
+  if (compact) {
+    return <canvas ref={canvasRef} className="block h-16 w-16 sm:h-28 sm:w-28" aria-hidden />
+  }
 
   return (
     <>
