@@ -4,7 +4,7 @@ import { withBase } from '../../utils/baseUrl'
 
 interface NodeCardProps {
   node: PortfolioNode
-  variant: 'research' | 'project'
+  variant: 'experience' | 'project'
 }
 
 /** Small "contact" dot that fires a stimulation ping on hover/focus. */
@@ -72,9 +72,9 @@ export default function NodeCard({ node, variant }: NodeCardProps) {
           {title}
         </h3>
         <p className="text-slate-600 text-sm mt-1">
-          {variant === 'research' ? detail.description : shortDescription}
+          {variant === 'experience' ? detail.description : shortDescription}
         </p>
-        <TagChips tags={variant === 'research' ? (detail.skills ?? tags) : tags} />
+        <TagChips tags={variant === 'experience' ? (detail.skills ?? tags) : tags} />
       </div>
     </Link>
   )

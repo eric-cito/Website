@@ -6,7 +6,8 @@ export default function ContactSection() {
     <section className="px-4 sm:px-6 max-w-3xl mx-auto w-full pb-16">
       <SectionHeading id="contact" title="Contact" />
       <p className="text-slate-600 mb-6 max-w-xl">
-        Interested in neuroimaging, neuromodulation, or just want to say hi? Reach out.
+        Open to roles in machine learning, health AI, neurotechnology, and biotech —
+        or just happy to talk shop. Reach out.
       </p>
       <div className="flex flex-wrap gap-3">
         <a

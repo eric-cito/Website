@@ -3,8 +3,9 @@ import { Outlet, Link } from 'react-router-dom'
 import { useScrollManager } from '../../hooks/useScrollManager'
 
 const navLinks = [
-  { label: 'Research', to: '/#research' },
+  { label: 'Experience', to: '/#experience' },
   { label: 'Projects', to: '/#projects' },
+  { label: 'Skills', to: '/#skills' },
   { label: 'CV', to: '/cv' },
 ]
 
