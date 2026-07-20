@@ -1,8 +1,8 @@
-import type { GraphNode } from '../../data/nodes'
+import type { PortfolioNode } from '../../data/nodes'
 import { withBase } from '../../utils/baseUrl'
 
 interface ProjectDetailProps {
-  node: GraphNode
+  node: PortfolioNode
   onBack: () => void
 }
 
@@ -25,9 +25,9 @@ export default function ProjectDetail({ node, onBack }: ProjectDetailProps) {
         type="button"
         onClick={onBack}
         className="text-accent hover:underline text-sm mb-6 sm:mb-8 inline-flex items-center gap-2 min-h-[44px] items-center touch-manipulation"
-        aria-label="Back to brain graph"
+        aria-label="Back to home"
       >
-        ← Back to brain
+        ← Back
       </button>
       {(detail.image || pdfLink) && (
         <figure className="mb-6 sm:mb-8 -mx-4 sm:-mx-6 sm:mx-0 rounded-lg overflow-hidden bg-slate-800/50 ring-1 ring-slate-700/50">

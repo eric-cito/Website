@@ -8,7 +8,7 @@ export interface NodeDetail {
   skills?: string[]
 }
 
-export interface GraphNode {
+export interface PortfolioNode {
   id: string
   title: string
   shortDescription: string
@@ -18,12 +18,7 @@ export interface GraphNode {
   detail: NodeDetail
 }
 
-export interface GraphLink {
-  source: string
-  target: string
-}
-
-export const nodes: GraphNode[] = [
+export const nodes: PortfolioNode[] = [
   {
     id: 'ncaa-tennis',
     title: 'NCAA Division 1 Athlete',
@@ -157,7 +152,7 @@ export const nodes: GraphNode[] = [
     href: '/project/triton-neurotech',
     detail: {
       description: 'Robotic arm control via EMG and neural networks.',
-      longDescription: 'Same initiative as NeuroTech Club - Prosthetics project: built robotic arm with Arduino, EMG, and neural networks. Coordinated events for BCI publicity. This node represents the formal role; the project node represents the technical deliverable.',
+      longDescription: 'Same initiative as the NeuroTech Club - Prosthetics project: built a robotic arm with Arduino, EMG, and neural networks, and coordinated events for BCI publicity. This entry covers the formal role; the project entry covers the technical deliverable.',
       date: 'Sep 2022 – June 2023',
       skills: ['Arduino', 'EMG', 'Neural Networks'],
       links: [{ label: 'neurotech.ucsd.edu', url: 'https://neurotech.ucsd.edu' }],
@@ -180,34 +175,9 @@ export const nodes: GraphNode[] = [
   },
 ]
 
-export const links: GraphLink[] = [
-  { source: 'neurotech-prosthetics', target: 'triton-neurotech' },
-  { source: 'neurotech-prosthetics', target: 'ucsf-lab' },
-  { source: 'neurotech-prosthetics', target: 'salk-lab' },
-  { source: 'ucsf-lab', target: 'salk-lab' },
-  { source: 'ucsf-lab', target: 'ucsd-systems-neuro' },
-  { source: 'salk-lab', target: 'ucsd-systems-neuro' },
-  { source: 'donkey-car', target: 'first-robotics' },
-  { source: 'donkey-car', target: 'salk-lab' },
-  { source: 'ncaa-tennis', target: 'triton-neurotech' },
-  { source: 'first-robotics', target: 'triton-neurotech' },
-  { source: 'fortune-website', target: 'donkey-car' },
-  { source: 'weill-cornell', target: 'ucsf-lab' },
-]
+export const researchNodes = nodes.filter((n) => n.type === 'experience')
+export const projectNodes = nodes.filter((n) => n.type === 'project')
 
-function toForceGraphNodes(): Array<{ id: string; [key: string]: unknown }> {
-  return nodes.map((n) => ({ ...n, id: n.id, name: n.title }))
-}
-
-function toForceGraphLinks(): Array<{ source: string; target: string }> {
-  return links.map((l) => ({ source: l.source, target: l.target }))
-}
-
-export const graphData = {
-  nodes: toForceGraphNodes(),
-  links: toForceGraphLinks(),
-}
-
-export function getNodeById(id: string): GraphNode | undefined {
+export function getNodeById(id: string): PortfolioNode | undefined {
   return nodes.find((n) => n.id === id)
 }

@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { VisitedNodesProvider } from './context/VisitedNodesContext'
 import Layout from './components/layout/Layout'
 import HomePage from './pages/home/HomePage'
 import ProjectPage from './pages/project/ProjectPage'
@@ -11,15 +10,13 @@ const basename = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '')
 function App() {
   return (
     <BrowserRouter basename={basename}>
-      <VisitedNodesProvider>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<HomePage />} />
-            <Route path="project/:id" element={<ProjectPage />} />
-            <Route path="cv" element={<CVPage />} />
-          </Route>
-        </Routes>
-      </VisitedNodesProvider>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path="project/:id" element={<ProjectPage />} />
+          <Route path="cv" element={<CVPage />} />
+        </Route>
+      </Routes>
     </BrowserRouter>
   )
 }

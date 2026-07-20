@@ -16,11 +16,12 @@ export default function ProjectPage() {
           onClick={() => navigate('/')}
           className="text-accent hover:underline"
         >
-          Back to brain
+          Back to home
         </button>
       </div>
     )
   }
 
-  return <ProjectDetail node={node} onBack={() => navigate('/')} />
+  const backTarget = node.type === 'experience' ? '/#research' : '/#projects'
+  return <ProjectDetail node={node} onBack={() => navigate(backTarget)} />
 }
