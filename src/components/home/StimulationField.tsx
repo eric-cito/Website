@@ -105,7 +105,7 @@ function computeGeometry(w: number, h: number): Geometry {
     180,
     narrow ? Math.min(w * 0.7, h * 0.34) : Math.min(w * 0.5, h * 0.62, 560)
   )
-  const cx = narrow ? w * 0.56 : w * 0.68
+  const cx = narrow ? w * 0.6 : w * 0.74
   // On narrow screens the brain sits above the copy instead of behind it
   const cy = narrow ? h * 0.15 : h * 0.44
   const brain: BrainBox = { x0: cx - s / 2, y0: cy - (s * BRAIN_ASPECT) / 2, s }
@@ -113,10 +113,10 @@ function computeGeometry(w: number, h: number): Geometry {
   const bx = (nx: number) => brain.x0 + nx * s
   const by = (ny: number) => brain.y0 + ny * s * BRAIN_ASPECT
 
-  // Lead enters through the top of the viewport and the crown of the skull,
-  // curving down to a deep target near the center of the brain.
-  const leadP0 = { x: bx(0.32), y: -10 }
-  const leadC = { x: bx(0.42), y: by(0.1) }
+  // Lead enters through a burr hole just above the skull line and curves down
+  // to the thalamic target.
+  const leadP0 = { x: bx(0.36), y: by(-0.03) }
+  const leadC = { x: bx(0.43), y: by(0.14) }
   const leadP1 = { x: bx(0.53), y: by(0.52) }
   const contacts = CONTACT_TS.map((t) => quadPoint(leadP0, leadC, leadP1, t))
 

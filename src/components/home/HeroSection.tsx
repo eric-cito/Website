@@ -13,7 +13,7 @@ export default function HeroSection() {
           Eric Cito
         </h1>
         <p className="text-slate-700 text-base sm:text-lg max-w-xl leading-relaxed mb-2">
-          Research Associate at the UCSF Neuromodulation Imaging Lab — Computer Engineering B.S.
+          Research Associate at the UCSF Neuromodulation Imaging Lab
         </p>
         <p className="text-slate-500 text-sm sm:text-base max-w-xl leading-relaxed mb-8">
           Building imaging pipelines and deep learning tools that help make brain
