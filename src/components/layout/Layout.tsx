@@ -29,6 +29,9 @@ export default function Layout() {
           <a href="https://www.linkedin.com/in/eric-cito-4709b919a" target="_blank" rel="noopener noreferrer" className="font-mono text-xs sm:text-sm uppercase tracking-wider text-ink-faint hover:text-signal transition-colors">
             LinkedIn
           </a>
+          <a href="https://orcid.org/0009-0007-3183-6416" target="_blank" rel="noopener noreferrer" className="font-mono text-xs sm:text-sm uppercase tracking-wider text-ink-faint hover:text-signal transition-colors">
+            ORCID
+          </a>
         </nav>
         <button
           type="button"
@@ -57,6 +60,7 @@ export default function Layout() {
             ))}
             <a href="mailto:eric.cito@ucsf.edu" className="block px-4 py-3 font-mono text-sm uppercase tracking-wider text-ink-soft hover:text-signal hover:bg-signal/5 transition-colors" onClick={() => setMenuOpen(false)}>Email</a>
             <a href="https://www.linkedin.com/in/eric-cito-4709b919a" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 font-mono text-sm uppercase tracking-wider text-ink-soft hover:text-signal hover:bg-signal/5 transition-colors" onClick={() => setMenuOpen(false)}>LinkedIn</a>
+            <a href="https://orcid.org/0009-0007-3183-6416" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 font-mono text-sm uppercase tracking-wider text-ink-soft hover:text-signal hover:bg-signal/5 transition-colors" onClick={() => setMenuOpen(false)}>ORCID</a>
           </nav>
         </div>
       )}
@@ -70,6 +74,9 @@ export default function Layout() {
             </a>
             <a href="https://www.linkedin.com/in/eric-cito-4709b919a" target="_blank" rel="noopener noreferrer" className="hover:text-signal transition-colors py-1 min-h-[44px] sm:min-h-0 flex items-center touch-manipulation">
               LinkedIn
+            </a>
+            <a href="https://orcid.org/0009-0007-3183-6416" target="_blank" rel="noopener noreferrer" className="hover:text-signal transition-colors py-1 min-h-[44px] sm:min-h-0 flex items-center touch-manipulation">
+              ORCID
             </a>
           </div>
         </footer>

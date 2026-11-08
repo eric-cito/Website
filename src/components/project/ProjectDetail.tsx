@@ -1,5 +1,6 @@
 import type { PortfolioNode } from '../../data/nodes'
 import { withBase } from '../../utils/baseUrl'
+import AutoplayVideo from '../ui/AutoplayVideo'
 import Tag from '../ui/Tag'
 
 interface ProjectDetailProps {
@@ -30,13 +31,21 @@ export default function ProjectDetail({ node, onBack }: ProjectDetailProps) {
       >
         ← Back
       </button>
-      {(detail.image || pdfLink) && (
+      {(detail.video || detail.image || pdfLink) && (
         <figure className="mb-6 sm:mb-8 -mx-4 sm:-mx-6 sm:mx-0 rounded-sm overflow-hidden bg-surface ring-1 ring-line">
-          {detail.image ? (
+          {detail.video ? (
+            <AutoplayVideo
+              src={withBase(detail.video)}
+              poster={detail.image && withBase(detail.image)}
+              className="w-full aspect-video object-cover"
+              label={`${title} demo video`}
+              controls
+            />
+          ) : detail.image ? (
             <img
               src={withBase(detail.image)}
               alt=""
-              className="w-full aspect-video object-cover"
+              className={`w-full aspect-video ${detail.imageFit === 'contain' ? 'object-contain' : 'object-cover'}`}
               loading="lazy"
             />
           ) : pdfLink ? (
@@ -84,6 +93,9 @@ export default function ProjectDetail({ node, onBack }: ProjectDetailProps) {
         {detail.date && (
           <p className="font-mono text-ink-faint text-sm mt-2">{detail.date}</p>
         )}
+        {detail.pi && (
+          <p className="font-mono text-ink-faint text-sm mt-1">PI: {detail.pi}</p>
+        )}
         {tags.length > 0 && (
           <div className="flex flex-wrap gap-1.5 mt-3">
             {tags.map((tag) => (
@@ -107,7 +119,7 @@ export default function ProjectDetail({ node, onBack }: ProjectDetailProps) {
             {detail.links.map((link) => (
               <a
                 key={link.url}
-                href={link.url}
+                href={link.url.startsWith('/') ? withBase(link.url) : link.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-mono text-signal hover:underline py-2 min-h-[44px] sm:min-h-0 flex items-center touch-manipulation"
@@ -116,6 +128,9 @@ export default function ProjectDetail({ node, onBack }: ProjectDetailProps) {
               </a>
             ))}
           </div>
+        )}
+        {detail.footnote && (
+          <p className="text-ink-faint text-xs mt-6 pt-4 border-t border-line">{detail.footnote}</p>
         )}
       </div>
     </article>

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import type { PortfolioNode } from '../../data/nodes'
 import { withBase } from '../../utils/baseUrl'
+import AutoplayVideo from '../ui/AutoplayVideo'
 import Tag from '../ui/Tag'
 
 interface NodeCardProps {
@@ -41,7 +42,13 @@ export default function NodeCard({ node }: NodeCardProps) {
       className="group relative block bg-paper border border-line rounded-sm overflow-hidden transition-colors duration-300 hover:border-signal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal touch-manipulation"
     >
       <ContactDot />
-      {detail.image ? (
+      {detail.video ? (
+        <AutoplayVideo
+          src={withBase(detail.video)}
+          poster={detail.image && withBase(detail.image)}
+          className="w-full aspect-video object-contain bg-surface"
+        />
+      ) : detail.image ? (
         <img
           src={withBase(detail.image)}
           alt=""

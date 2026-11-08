@@ -86,6 +86,9 @@ export default function ExperienceSection() {
                     </span>
                   )}
                 </div>
+                {node.detail.pi && (
+                  <p className="font-mono text-ink-faint text-xs mt-1">PI: {node.detail.pi}</p>
+                )}
                 <p className="text-ink-soft text-sm mt-1.5 leading-relaxed">{node.detail.description}</p>
                 {node.detail.conferences && node.detail.conferences.length > 0 && (
                   <div className="flex flex-wrap items-center gap-1.5 mt-3">

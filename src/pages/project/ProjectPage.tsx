@@ -23,5 +23,5 @@ export default function ProjectPage() {
   }
 
   const backTarget = node.type === 'experience' ? '/#experience' : '/#projects'
-  return <ProjectDetail node={node} onBack={() => navigate(backTarget)} />
+  return <ProjectDetail node={node} onBack={() => navigate(backTarget, { state: { instantScroll: true } })} />
 }
