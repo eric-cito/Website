@@ -129,6 +129,19 @@ export default function ProjectDetail({ node, onBack }: ProjectDetailProps) {
             ))}
           </div>
         )}
+        {detail.gallery && detail.gallery.length > 0 && (
+          <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {detail.gallery.map((photo) => (
+              <img
+                key={photo.src}
+                src={withBase(photo.src)}
+                alt={photo.alt}
+                className="w-full rounded-sm ring-1 ring-line bg-surface"
+                loading="lazy"
+              />
+            ))}
+          </div>
+        )}
         {detail.footnote && (
           <p className="text-ink-faint text-xs mt-6 pt-4 border-t border-line">{detail.footnote}</p>
         )}

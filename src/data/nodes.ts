@@ -14,6 +14,8 @@ export interface NodeDetail {
   skills?: string[]
   /** Conferences, symposia, or poster sessions where this work was presented */
   conferences?: string[]
+  /** Extra photos shown on the detail page, after the description */
+  gallery?: { src: string; alt: string }[]
   /** Small print shown at the bottom of the detail page */
   footnote?: string
 }
@@ -127,7 +129,12 @@ export const nodes: PortfolioNode[] = [
       video: '/videos/dbs-electrode-segmentation.mp4',
       date: 'July 2025 – Present',
       skills: ['Python', 'PyTorch', 'U-Net', 'DICOM', 'SimpleITK'],
+      conferences: ['ISMRM 2026', 'UCSF Research AI Day'],
       links: [
+        {
+          label: 'ISMRM 2026 abstract',
+          url: 'https://echo.ismrm.org/abstracts/view/5317a3c4-9494-4a49-bf54-841fe6cece57',
+        },
         { label: 'UCSF Research AI Day poster (PDF)', url: '/UCSF_Research_AI_Day_Poster.pdf' },
         { label: 'morrisonlab.ucsf.edu', url: 'https://morrisonlab.ucsf.edu' },
       ],
@@ -147,7 +154,14 @@ export const nodes: PortfolioNode[] = [
       imageFit: 'contain',
       date: 'July 2025 – Present',
       skills: ['Python', 'QSM', 'DICOM', 'SimpleITK'],
-      links: [{ label: 'morrisonlab.ucsf.edu', url: 'https://morrisonlab.ucsf.edu' }],
+      conferences: ['ISMRM 2026'],
+      links: [
+        {
+          label: 'ISMRM 2026 abstract',
+          url: 'https://echo.ismrm.org/abstracts/view/ed86a125-ca8a-4083-a0cd-49962d4c78a0',
+        },
+        { label: 'morrisonlab.ucsf.edu', url: 'https://morrisonlab.ucsf.edu' },
+      ],
     },
   },
   {
@@ -205,6 +219,7 @@ export const nodes: PortfolioNode[] = [
       longDescription: 'Built a robotic arm on Arduino that responds to Electromyography (EMG) readings in real time. Implemented the filtering stage to clean noisy muscle signals and trained neural networks to interpret them as control commands, delivering a working prototype. Also coordinated events promoting brain-computer interfaces to students and the public.',
       date: 'Sep 2022 – June 2023',
       image: '/images/neurotech-prosthetics.jpg',
+      imageFit: 'contain',
       skills: ['Python', 'Neural Networks', 'EMG', 'Signal Processing', 'Arduino'],
       links: [{ label: 'neurotech.ucsd.edu', url: 'https://neurotech.ucsd.edu' }],
     },
@@ -238,6 +253,7 @@ export const nodes: PortfolioNode[] = [
       longDescription: 'Competed in FIRST Lego League and FIRST Tech Challenge from elementary through high school. Implemented computer vision for autonomous ball targeting and navigation on the competition field, and used CAD and 3D printing to fabricate custom parts. Volunteered 50+ hours introducing robotics to elementary school students.',
       date: 'Sep 2008 – June 2019',
       image: '/images/first-robotics.jpg',
+      imageFit: 'contain',
       skills: ['C++', 'Computer Vision', 'CAD', '3D Printing'],
       links: [{ label: 'teaminspiration.global', url: 'https://www.teaminspiration.global' }],
     },
@@ -254,6 +270,7 @@ export const nodes: PortfolioNode[] = [
       longDescription: 'Studied how bioconjugation levels affect radiotracer synthesis and immunoreactivity in HER2-targeting antibodies. Synthesized immunoconjugates, purified them via size-exclusion chromatography, and quantified DFO-to-antibody ratios. Found immunoreactivity held stable at 60-fold DFO excess while the association rate decreased — a usable ceiling for conjugation. First Place at the Weill Cornell Medicine Catalyst Program Poster Session.',
       date: 'June 2018 – Sep 2018',
       image: '/images/weill-cornell-poster.jpg',
+      imageFit: 'contain',
       skills: ['Bioconjugation', 'Chromatography', 'Radiochemistry', 'Assay Design'],
       conferences: ['Weill Cornell Medicine Catalyst Program Poster Session'],
       links: [{ label: 'Catalyst Program poster (PDF)', url: '/Poster_ECS_Sai_Fixed.pdf' }],
@@ -270,9 +287,17 @@ export const nodes: PortfolioNode[] = [
       description: 'NCAA Division 1 Men\'s Tennis Student-Athlete and two-season Team Captain.',
       longDescription: 'Voted Team Captain for the 2021-2022 and 2022-2023 seasons. Organized captain practices and served as the communication channel between team and coaches. Selected for the Triton Athlete Council - Student-Athlete Advisory Committee, working with the athletic department to improve the student-athlete experience — all while carrying a full engineering course load and research schedule.',
       date: 'Sept 2020 – Mar 2023',
-      image: '/images/ncaa-tennis.jpg',
+      image: '/images/tennis-action.jpg',
+      gallery: [{ src: '/images/tennis-headshot.jpg', alt: 'Eric Cito, UC San Diego men\'s tennis roster photo' }],
       skills: ['Leadership', 'Teamwork', 'Time Management'],
-      links: [{ label: 'ucsdtritons.com', url: 'https://ucsdtritons.com/sports/mens-tennis/roster/eric-cito/12844' }],
+      links: [
+        { label: 'UCSD roster profile', url: 'https://ucsdtritons.com/sports/mens-tennis/roster/eric-cito/12844' },
+        {
+          label: 'Fab Five feature (UCSD Athletics)',
+          url: 'https://ucsdtritons.com/news/2022/8/23/mens-tennis-fab-five-eric-silberman.aspx',
+        },
+      ],
+      footnote: 'Photos courtesy of UC San Diego Athletics. The Fab Five feature lists me as Eric Silberman, my previous last name. My last name is now Cito.',
     },
   },
 ]
