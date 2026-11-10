@@ -118,7 +118,7 @@ export const nodes: PortfolioNode[] = [
   {
     id: 'lead-trajectory-outcomes',
     title: 'DBS Lead Trajectories & Clinical Outcomes',
-    shortDescription: 'Mapping the brain regions DBS leads pass through and linking them to Parkinson\'s outcomes',
+    shortDescription: 'Mapping the brain regions DBS leads pass through and linking them to Parkinson\'s outcomes.',
     type: 'project',
     tags: ['Machine Learning', 'Medical Imaging', 'Deep Brain Stimulation', 'Python'],
     href: '/project/lead-trajectory-outcomes',
@@ -189,7 +189,7 @@ export const nodes: PortfolioNode[] = [
   {
     id: 'dystonia-dbs-fmri',
     title: 'Longitudinal DBS-fMRI in Cervical Dystonia',
-    shortDescription: 'Tracking how pallidal DBS changes motor network connectivity over time in cervical dystonia',
+    shortDescription: 'Tracking how pallidal DBS changes motor network connectivity over time in cervical dystonia.',
     type: 'project',
     tags: ['fMRI', 'Deep Brain Stimulation', 'Functional Connectivity', 'Dystonia'],
     href: '/project/dystonia-dbs-fmri',
@@ -213,7 +213,7 @@ export const nodes: PortfolioNode[] = [
   {
     id: 'deep-isolation-forest-outliers',
     title: 'Deep Isolation Forest Outlier Analysis',
-    shortDescription: 'Machine learning outlier analysis of resting-state fMRI from 12,000 ABCD Study participants',
+    shortDescription: 'Machine learning outlier analysis of resting-state fMRI from 12,000 ABCD Study participants.',
     type: 'project',
     tags: ['Machine Learning', 'Anomaly Detection', 'fMRI', 'Python'],
     href: '/project/deep-isolation-forest-outliers',
@@ -232,7 +232,7 @@ export const nodes: PortfolioNode[] = [
   {
     id: 'neurotech-prosthetics',
     title: 'EMG-Controlled Robotic Arm',
-    shortDescription: 'Neural networks decoding muscle signals into real-time control',
+    shortDescription: 'Neural networks decoding muscle signals into real-time control.',
     type: 'project',
     tags: ['Neurotechnology', 'Neural Networks', 'Signal Processing', 'Arduino'],
     href: '/project/neurotech-prosthetics',
@@ -249,7 +249,7 @@ export const nodes: PortfolioNode[] = [
   {
     id: 'donkey-car',
     title: 'Self-Driving RC Car',
-    shortDescription: 'End-to-end vision autopilot deployed on embedded hardware',
+    shortDescription: 'End-to-end vision autopilot deployed on embedded hardware.',
     type: 'project',
     tags: ['Computer Vision', 'Deep Learning', 'Python', 'Edge Deployment'],
     href: '/project/donkey-car',
@@ -266,7 +266,7 @@ export const nodes: PortfolioNode[] = [
   {
     id: 'first-robotics',
     title: 'FIRST Robotics',
-    shortDescription: 'Autonomous targeting and navigation with computer vision',
+    shortDescription: 'Autonomous targeting and navigation with computer vision.',
     type: 'project',
     tags: ['Computer Vision', 'Robotics', 'C++'],
     href: '/project/first-robotics',
@@ -283,7 +283,7 @@ export const nodes: PortfolioNode[] = [
   {
     id: 'weill-cornell-poster',
     title: 'Weill Cornell Catalyst Poster',
-    shortDescription: 'HER2 immunoconjugate poster — First Place, Weill Cornell Catalyst Program',
+    shortDescription: 'HER2 immunoconjugate poster — First Place, Weill Cornell Catalyst Program.',
     type: 'project',
     tags: ['Biotech', 'Assay Development', 'Analytical Chemistry'],
     href: '/project/weill-cornell-poster',
@@ -301,7 +301,7 @@ export const nodes: PortfolioNode[] = [
   {
     id: 'ncaa-tennis',
     title: 'NCAA Division 1 Athlete',
-    shortDescription: 'Team Captain, Men\'s Tennis at UC San Diego',
+    shortDescription: 'Team Captain, Men\'s Tennis at UC San Diego.',
     type: 'project',
     tags: ['Leadership', 'Teamwork'],
     href: '/project/ncaa-tennis',
