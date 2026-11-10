@@ -171,8 +171,14 @@ export const nodes: PortfolioNode[] = [
     detail: {
       description: 'A modular framework that automates Quantitative Susceptibility Mapping (QSM) and delivers it to neurosurgical planning systems.',
       longDescription: 'Quantitative susceptibility mapping (QSM) shows deep brain stimulation targets more clearly than conventional MRI, but it rarely reaches the operating room: scanners can\'t compute it on their own, and it is usually saved in a research format that clinical systems can\'t read. I developed an end-to-end framework that removes both barriers, with a public GitHub release planned. It pulls DICOMs from clinical PACS, skull-strips them with HD-BET, generates QSM with the QSMxT pipeline, and aligns it to an FGATIR anatomical reference with ANTs registration. A custom module then converts the result into orientation-safe DICOMs and sends them back to PACS, ready for Medtronic StealthStation and Brainlab Elements. Each of the four stages (input, processing, DICOM generation, output) can be swapped to fit an institution\'s infrastructure. Tested on GE and Philips data from five patients, it ran in 216–486 seconds with registration errors of 0.80–1.73 mm, and worked with both planning systems.',
-      image: '/images/qsm-reconstruction-pipeline.jpg',
-      imageFit: 'contain',
+      image: '/images/qsm-pipeline-title.jpg',
+      video: '/videos/qsm-pipeline.mp4',
+      gallery: [
+        {
+          src: '/images/qsm-reconstruction-pipeline.jpg',
+          alt: 'FGATIR, QSM, and FGATIR-aligned QSM images showing deep brain stimulation targets',
+        },
+      ],
       date: 'July 2025 – Present',
       skills: ['Python', 'QSM', 'DICOM', 'PACS', 'ANTs', 'HD-BET', 'QSMxT'],
       conferences: ['ISMRM 2026'],
