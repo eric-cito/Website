@@ -138,13 +138,13 @@ export const nodes: PortfolioNode[] = [
   {
     id: 'dbs-electrode-segmentation',
     title: 'DBS Lead Segmentation',
-    shortDescription: 'An open-source 2D U-Net that segments full DBS lead trajectories from postoperative CT',
+    shortDescription: 'A 2D U-Net that segments full DBS lead trajectories from postoperative CT. Manuscript submitted; to be released as a 3D Slicer extension for public use.',
     type: 'project',
     tags: ['Deep Learning', 'Medical Imaging', 'PyTorch', 'U-Net'],
     href: '/project/dbs-electrode-segmentation',
     detail: {
       description: 'A 2D U-Net that automatically segments multi-target DBS lead trajectories on postoperative imaging.',
-      longDescription: 'Response to deep brain stimulation may depend on the entire lead trajectory, not just where the electrode contacts sit, but no reliable open-source tools exist to segment it. I developed a 2D U-Net in PyTorch to segment DBS leads from postoperative CT, trained on 124 patients with movement disorders and leads targeting the basal ganglia, thalamus, or cerebellum. Ground truths were multi-rater manual segmentations in ITK-SNAP. CT volumes were skull-stripped and processed slice by slice, with lead slices oversampled to address class imbalance, and trained on an NVIDIA A100 cluster with a combined Dice, focal, and binary cross-entropy loss. On the held-out test set of 20 patients, slice- and volume-based Dice scores were 0.78 and 0.80, with very few false positives or negatives. Applied without retraining to postoperative T1-weighted MRI, the CT model also gave promising qualitative results, the first step toward MRI-based segmentation through CT-to-MRI transfer learning.',
+      longDescription: 'Response to deep brain stimulation may depend on the entire lead trajectory, not just where the electrode contacts sit, but no reliable open-source tools exist to segment it. I developed a 2D U-Net in PyTorch, to be released as a 3D Slicer extension for public use, to segment DBS leads from postoperative CT, trained on 124 patients with movement disorders and leads targeting the basal ganglia, thalamus, or cerebellum. Ground truths were multi-rater manual segmentations in ITK-SNAP. CT volumes were skull-stripped and processed slice by slice, with lead slices oversampled to address class imbalance, and trained on an NVIDIA A100 cluster with a combined Dice, focal, and binary cross-entropy loss. In the version presented at ISMRM 2026, slice- and volume-based Dice scores on a held-out test set of 20 patients were 0.78 and 0.80, with very few false positives or negatives. The dataset has grown with each presentation, and the model has since been trained and tested on 200 patients. Applied without retraining to postoperative T1-weighted MRI, the CT model also gave promising qualitative results, the first step toward MRI-based segmentation through CT-to-MRI transfer learning.',
       image: '/images/dbs-electrode-segmentation.jpg',
       video: '/videos/dbs-electrode-segmentation.mp4',
       date: 'July 2025 – Present',
@@ -164,13 +164,13 @@ export const nodes: PortfolioNode[] = [
   {
     id: 'qsm-reconstruction-pipeline',
     title: 'QSM Reconstruction Pipeline',
-    shortDescription: 'An automated framework that brings QSM into clinical DBS neurosurgical planning',
+    shortDescription: 'An automated framework that brings QSM into clinical DBS neurosurgical planning. Manuscript submitted; to be released on GitHub for public use.',
     type: 'project',
     tags: ['Medical Imaging', 'QSM', 'Python', 'MRI'],
     href: '/project/qsm-reconstruction-pipeline',
     detail: {
       description: 'A modular framework that automates Quantitative Susceptibility Mapping (QSM) and delivers it to neurosurgical planning systems.',
-      longDescription: 'Quantitative susceptibility mapping (QSM) shows deep brain stimulation targets more clearly than conventional MRI, but it rarely reaches the operating room: scanners can\'t compute it on their own, and it is usually saved in a research format that clinical systems can\'t read. I developed an open-source, end-to-end framework that removes both barriers. It pulls DICOMs from clinical PACS, skull-strips them with HD-BET, generates QSM with the QSMxT pipeline, and aligns it to an FGATIR anatomical reference with ANTs registration. A custom module then converts the result into orientation-safe DICOMs and sends them back to PACS, ready for Medtronic StealthStation and Brainlab Elements. Each of the four stages (input, processing, DICOM generation, output) can be swapped to fit an institution\'s infrastructure. Tested on GE and Philips data from five patients, it ran in 216–486 seconds with registration errors of 0.80–1.73 mm, and worked with both planning systems.',
+      longDescription: 'Quantitative susceptibility mapping (QSM) shows deep brain stimulation targets more clearly than conventional MRI, but it rarely reaches the operating room: scanners can\'t compute it on their own, and it is usually saved in a research format that clinical systems can\'t read. I developed an end-to-end framework that removes both barriers, with a public GitHub release planned. It pulls DICOMs from clinical PACS, skull-strips them with HD-BET, generates QSM with the QSMxT pipeline, and aligns it to an FGATIR anatomical reference with ANTs registration. A custom module then converts the result into orientation-safe DICOMs and sends them back to PACS, ready for Medtronic StealthStation and Brainlab Elements. Each of the four stages (input, processing, DICOM generation, output) can be swapped to fit an institution\'s infrastructure. Tested on GE and Philips data from five patients, it ran in 216–486 seconds with registration errors of 0.80–1.73 mm, and worked with both planning systems.',
       image: '/images/qsm-reconstruction-pipeline.jpg',
       imageFit: 'contain',
       date: 'July 2025 – Present',
