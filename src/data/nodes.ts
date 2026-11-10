@@ -163,7 +163,7 @@ export const nodes: PortfolioNode[] = [
   },
   {
     id: 'qsm-reconstruction-pipeline',
-    title: 'QSM Reconstruction Pipeline',
+    title: 'QSM Reconstruction Pipeline for DBS Neurosurgical Planning',
     shortDescription: 'An automated framework that brings QSM into clinical DBS neurosurgical planning. Manuscript submitted; to be released on GitHub for public use.',
     type: 'project',
     tags: ['Medical Imaging', 'QSM', 'Python', 'MRI'],
