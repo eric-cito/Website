@@ -33,10 +33,10 @@ export default function HeroSection() {
             Machine learning for health and neurotechnology
           </p>
           <p className="font-mono text-ink-faint text-xs sm:text-sm leading-relaxed mt-1">
-            Currently Research Associate at UCSF Neuromodulation Imaging Lab
+            Currently Assistant Specialist III at UCSF Neuromodulation Imaging Lab
           </p>
           <p className="font-mono text-ink-faint text-xs sm:text-sm leading-relaxed">
-            University of Califonia San Diego Computer Engineering B.S.
+            University of California San Diego Computer Engineering B.S.
           </p>
         </div>
         <div className="flex gap-2 sm:gap-3">

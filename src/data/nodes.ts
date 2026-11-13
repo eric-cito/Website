@@ -42,7 +42,7 @@ export const nodes: PortfolioNode[] = [
     href: '/project/ucsf-lab',
     detail: {
       description: 'Deep learning segmentation and quantitative MRI reconstruction pipelines for surgical planning.',
-      longDescription: 'Co-developing a 2D U-Net model that automatically segments implanted DBS electrodes from postoperative CT, and a modular Quantitative Susceptibility Mapping (QSM) reconstruction pipeline used for surgical targeting. Work spans the full pipeline: DICOM ingestion, preprocessing, model training and evaluation, and packaging the result into something clinicians can actually run. Collaborating with MRI technicians on acquisition and protocol verification. Two abstracts submitted to ISMRM 2026.',
+      longDescription: 'Co-developing a 2D U-Net model that automatically segments implanted DBS electrodes from postoperative CT, and a modular Quantitative Susceptibility Mapping (QSM) reconstruction pipeline used for surgical targeting. Work spans the full pipeline: DICOM ingestion, preprocessing, model training and evaluation, and packaging the result into something clinicians can actually run. Collaborating with MRI technicians on acquisition and protocol verification. Also studying longitudinal motor-network changes after pallidal DBS in cervical dystonia (fMRI) and how whole-brain lead trajectories relate to medication and cognitive outcomes in Parkinson’s disease. Work presented at ISMRM 2026, the MDS Congress 2026, UCSF PROPEL Symposium, and UCSF Research AI Day.',
       date: 'July 2025 – Present',
       pi: 'Melanie A. Morrison, PhD',
       skills: ['Python', 'PyTorch', 'U-Net', 'QSM', 'DICOM', 'SimpleITK'],
