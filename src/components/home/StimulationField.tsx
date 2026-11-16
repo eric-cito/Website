@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, type RefObject } from 'react'
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion'
 
 const ACCENT = '14, 154, 167'
@@ -94,14 +94,29 @@ const DESKTOP_SCALE = 0.85
 
 const CONTACT_TS = [0.935, 0.965, 0.995]
 
-function computeGeometry(w: number, h: number, compact: boolean): Geometry {
+// Brain outline's leftmost point, as a fraction of the scene width s
+const BRAIN_LEFT_INSET = 0.03
+// Minimum px between the hero text and the brain outline
+const TEXT_GAP = 32
+
+function computeGeometry(w: number, h: number, compact: boolean, minLeft = 0): Geometry {
   // Compact: a small inline badge (e.g. next to the headshot on mobile) —
   // the whole scene is centered and scaled to fill the box, no separate
   // width/height weighting needed since the box is roughly square.
-  const s = compact
+  let s = compact
     ? Math.min(w, h / BRAIN_ASPECT) * 0.92
     : Math.max(180, Math.min(w * 0.5, h * 0.75, 720) * DESKTOP_SCALE)
-  const cx = compact ? w / 2 : w * 0.76
+  let cx = compact ? w / 2 : w * 0.76
+  if (!compact && minLeft > 0) {
+    // Keep the outline clear of the hero text: slide right first, and only
+    // shrink if the brain would otherwise run off the right edge.
+    const rightLimit = w - 16
+    cx = Math.max(cx, minLeft + s * (0.5 - BRAIN_LEFT_INSET))
+    if (cx + s / 2 > rightLimit) {
+      s = Math.max(180, Math.min(s, (rightLimit - minLeft) / (1 - BRAIN_LEFT_INSET)))
+      cx = rightLimit - s / 2
+    }
+  }
   const cy = compact ? h / 2 : h * 0.44
   const brain: BrainBox = { x0: cx - s / 2, y0: cy - (s * BRAIN_ASPECT) / 2, s }
 
@@ -196,6 +211,8 @@ function drawRipple(ctx: CanvasRenderingContext2D, ripple: Ripple, maxRadius: nu
 interface StimulationFieldProps {
   /** Render as a small square inline badge instead of a full-bleed background. */
   compact?: boolean
+  /** Element the brain must stay to the right of (desktop background only). */
+  avoidRef?: RefObject<HTMLElement>
 }
 
 /**
@@ -204,7 +221,7 @@ interface StimulationFieldProps {
  * compact mode, as a small inline badge. Static single frame under
  * prefers-reduced-motion.
  */
-export default function StimulationField({ compact = false }: StimulationFieldProps) {
+export default function StimulationField({ compact = false, avoidRef }: StimulationFieldProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const reducedMotion = usePrefersReducedMotion()
 
@@ -234,7 +251,13 @@ export default function StimulationField({ compact = false }: StimulationFieldPr
       canvas.width = Math.round(width * dpr)
       canvas.height = Math.round(height * dpr)
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-      geo = computeGeometry(width, height, compact)
+      let minLeft = 0
+      const avoid = avoidRef?.current
+      if (avoid) {
+        // scrollWidth includes lines that overflow the column (e.g. nowrap text)
+        minLeft = avoid.getBoundingClientRect().left - canvas.getBoundingClientRect().left + avoid.scrollWidth + TEXT_GAP
+      }
+      geo = computeGeometry(width, height, compact, minLeft)
     }
     resize()
     const observer = new ResizeObserver(() => {
@@ -242,10 +265,20 @@ export default function StimulationField({ compact = false }: StimulationFieldPr
       if (reducedMotion) drawStaticFrame()
     })
     observer.observe(canvas)
+    // Text width shifts once web fonts load; re-measure the gap then.
+    let disposed = false
+    document.fonts?.ready.then(() => {
+      if (disposed) return
+      resize()
+      if (reducedMotion) drawStaticFrame()
+    })
 
     if (reducedMotion) {
       drawStaticFrame()
-      return () => observer.disconnect()
+      return () => {
+        disposed = true
+        observer.disconnect()
+      }
     }
 
     let ripples: Ripple[] = []
@@ -312,12 +345,13 @@ export default function StimulationField({ compact = false }: StimulationFieldPr
 
     start()
     return () => {
+      disposed = true
       stop()
       observer.disconnect()
       intersection.disconnect()
       document.removeEventListener('visibilitychange', onVisibilityChange)
     }
-  }, [reducedMotion, compact])
+  }, [reducedMotion, compact, avoidRef])
 
   if (compact) {
     return <canvas ref={canvasRef} className="block h-16 w-16 sm:h-28 sm:w-28" aria-hidden />

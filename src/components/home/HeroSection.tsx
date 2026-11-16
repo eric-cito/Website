@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import StimulationField from './StimulationField'
 import SectionHeading from './SectionHeading'
 import { LinkButton } from '../ui/Button'
@@ -6,14 +7,15 @@ import { skillGroups } from '../../data/skills'
 import { withBase } from '../../utils/baseUrl'
 
 export default function HeroSection() {
+  const textRef = useRef<HTMLDivElement>(null)
   return (
     <section className="relative lg:min-h-[calc(100dvh-4rem)] flex flex-col">
       <div className="absolute inset-0 hidden lg:block">
-        <StimulationField />
+        <StimulationField avoidRef={textRef} />
       </div>
       <div className="relative z-10 flex flex-col lg:flex-1 lg:justify-center py-6 lg:py-10 px-4 sm:px-6 max-w-5xl mx-auto w-full">
         <p className="font-mono text-signal text-[0.65rem] leading-4 sm:text-sm sm:leading-normal tracking-wide sm:tracking-widest uppercase mb-3">
-          Machine Learning · Health AI · Neurotechnology
+          Machine Learning · Neuroimaging · Neuromodulation
         </p>
         <div className="flex flex-wrap items-center gap-4 mb-4">
           <img
@@ -28,11 +30,11 @@ export default function HeroSection() {
             <StimulationField compact />
           </div>
         </div>
-        <div className="max-w-xl mb-8">
+        <div ref={textRef} className="max-w-xl mb-8">
           <p className="text-ink-soft text-base sm:text-lg leading-relaxed">
             Machine learning for health and neurotechnology
           </p>
-          <p className="font-mono text-ink-faint text-xs sm:text-sm leading-relaxed mt-1">
+          <p className="font-mono text-ink-faint text-xs sm:text-sm leading-relaxed mt-1 lg:whitespace-nowrap">
             Currently Assistant Specialist III at UCSF Neuromodulation Imaging Lab
           </p>
           <p className="font-mono text-ink-faint text-xs sm:text-sm leading-relaxed">
@@ -41,8 +43,8 @@ export default function HeroSection() {
         </div>
         <div className="flex gap-2 sm:gap-3">
           <LinkButton to="/#experience" className="flex-1 sm:flex-initial">Experience</LinkButton>
-          <LinkButton to="/#projects" className="flex-1 sm:flex-initial">Projects</LinkButton>
-          <LinkButton to="/cv" variant="solid" className="flex-1 sm:flex-initial">View CV</LinkButton>
+          <LinkButton to="/cv" className="flex-1 sm:flex-initial">View CV</LinkButton>
+          <LinkButton to="/#projects" variant="solid" className="flex-1 sm:flex-initial">Projects</LinkButton>
         </div>
       </div>
       <div className="relative z-10 px-4 sm:px-6 max-w-5xl mx-auto w-full pt-2 lg:pt-6 pb-8">
