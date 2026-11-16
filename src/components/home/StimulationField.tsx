@@ -83,9 +83,16 @@ interface Geometry {
   leadP1: Point
   contacts: Point[]
   maxRadius: number
+  /** Scales lead/contact stroke widths so the scene shrinks as a whole */
+  detailScale: number
 }
 
-const CONTACT_TS = [0.72, 0.81, 0.9, 0.99]
+// DBS lead contacts are packed into the last ~1 cm, right at the tip.
+// Overall size of the desktop hero scene (brain, lead, contacts) relative to
+// the largest size that fits.
+const DESKTOP_SCALE = 0.85
+
+const CONTACT_TS = [0.935, 0.965, 0.995]
 
 function computeGeometry(w: number, h: number, compact: boolean): Geometry {
   // Compact: a small inline badge (e.g. next to the headshot on mobile) —
@@ -93,8 +100,8 @@ function computeGeometry(w: number, h: number, compact: boolean): Geometry {
   // width/height weighting needed since the box is roughly square.
   const s = compact
     ? Math.min(w, h / BRAIN_ASPECT) * 0.92
-    : Math.max(180, Math.min(w * 0.5, h * 0.62, 560))
-  const cx = compact ? w / 2 : w * 0.74
+    : Math.max(180, Math.min(w * 0.5, h * 0.75, 720) * DESKTOP_SCALE)
+  const cx = compact ? w / 2 : w * 0.76
   const cy = compact ? h / 2 : h * 0.44
   const brain: BrainBox = { x0: cx - s / 2, y0: cy - (s * BRAIN_ASPECT) / 2, s }
 
@@ -108,7 +115,8 @@ function computeGeometry(w: number, h: number, compact: boolean): Geometry {
   const leadP1 = { x: bx(0.53), y: by(0.52) }
   const contacts = CONTACT_TS.map((t) => quadPoint(leadP0, leadC, leadP1, t))
 
-  return { brain, leadP0, leadC, leadP1, contacts, maxRadius: s * 0.24 }
+  const detailScale = compact ? 1 : DESKTOP_SCALE
+  return { brain, leadP0, leadC, leadP1, contacts, maxRadius: s * 0.24, detailScale }
 }
 
 function traceBrainPath(ctx: CanvasRenderingContext2D, brain: BrainBox, segments: number[][], start?: [number, number]) {
@@ -151,16 +159,16 @@ function drawScene(ctx: CanvasRenderingContext2D, geo: Geometry) {
 
   // Lead
   ctx.strokeStyle = `rgba(${OUTLINE}, 0.6)`
-  ctx.lineWidth = 3
+  ctx.lineWidth = 3 * geo.detailScale
   ctx.beginPath()
   ctx.moveTo(geo.leadP0.x, geo.leadP0.y)
   ctx.quadraticCurveTo(geo.leadC.x, geo.leadC.y, geo.leadP1.x, geo.leadP1.y)
   ctx.stroke()
 
   // Contacts — sized relative to brain scale, but capped by the actual gap
-  // between adjacent contacts so they stay 4 distinct marks at any size
+  // between adjacent contacts so they stay distinct marks at any size
   // instead of merging into one blob in compact mode.
-  const contactScale = Math.max(0.35, brain.s / 560)
+  const contactScale = Math.min(1, Math.max(0.35, brain.s / 560)) * geo.detailScale
   const gaps = geo.contacts.slice(1).map((pt, i) => Math.hypot(pt.x - geo.contacts[i].x, pt.y - geo.contacts[i].y))
   const minGap = Math.min(...gaps)
   const contactReach = Math.min(4 * contactScale, minGap * 0.4)
