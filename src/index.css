@@ -55,3 +55,12 @@ body {
 .font-heading {
   font-family: 'Syne', sans-serif;
 }
+
+/* Inline videos may crop (object-cover) to fit their card; in fullscreen,
+   always show the whole frame instead of cropping to the screen's aspect. */
+video:fullscreen {
+  object-fit: contain !important;
+}
+video:-webkit-full-screen {
+  object-fit: contain !important;
+}
