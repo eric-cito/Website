@@ -41,8 +41,8 @@ export const nodes: PortfolioNode[] = [
     tags: ['Deep Learning', 'Medical Imaging', 'Python', 'PyTorch'],
     href: '/project/ucsf-lab',
     detail: {
-      description: 'Advancing neuromodulation therapies for patients with movement disorders and neuropsychiatric conditions by extracting quantitative information from brain MRI to study and predict patients’ neural and clinical responses to brain stimulation.',
-      longDescription: 'Co-developing a modular Quantitative Susceptibility Mapping (QSM) imaging pipeline to enhance visualization of deep-brain structures to support Deep Brain Stimulation (DBS) surgical planning, and a 2D U-Net deep learning model to automatically segment implanted DBS leads to localize and visualize lead placement across brain regions. Investigating longitudinal changes in motor network connectivity following pallidal DBS in patients with cervical dystonia using fMRI analysis, and examining associations between whole-brain DBS lead trajectories and post-operative medication reduction and cognitive outcomes in Parkinson’s disease using machine learning techniques. Collaborating with MRI technicians to ensure high-quality acquisition of brain scans and verifying that imaging protocols are properly executed. Findings presented at the International Congress of Parkinson’s Disease and Movement Disorders 2026, the ISMRM Annual Meeting 2026, the UCSF PROPEL Symposium 2026, and UCSF Research AI Day 2026.',
+      description: 'Advancing neuromodulation therapies for patients with neurological conditions by extracting quantitative information from brain MRI to study and predict patients’ neural and clinical responses to brain stimulation.',
+      longDescription: 'Developing a modular quantitative susceptibility mapping (QSM) imaging pipeline to enhance visualization of deep-brain structures for deep brain stimulation (DBS) surgical planning, and a 2D U-Net deep learning model to automatically segment implanted DBS leads and localize lead placement across brain regions. Investigating longitudinal changes in motor network functional connectivity following pallidal DBS for cervical dystonia, and machine learning-based prediction of DBS outcomes based on whole-brain DBS lead trajectories. Findings presented at the International Congress of Parkinson’s Disease and Movement Disorders 2026, the ISMRM Annual Meeting 2026, the UCSF PROPEL Symposium 2026, and UCSF Research AI Day 2026.',
       date: 'July 2025 – Present',
       pi: 'Melanie A. Morrison, PhD',
       skills: ['Python', 'PyTorch', 'U-Net', 'QSM', 'DICOM', 'SimpleITK'],
@@ -59,7 +59,7 @@ export const nodes: PortfolioNode[] = [
     href: '/project/salk-lab',
     detail: {
       description: 'Anomaly detection and quality-control metrics over a 12,000-participant neuroimaging dataset.',
-      longDescription: 'Conducted research under Dr. Margot Wagner and Dr. Alessandra Camassa on developing quantitative diagnostic metrics for neuropsychiatric disorders using machine learning and resting-state fMRI data from the Adolescent Brain Cognitive Development (ABCD) Study (12,000 participants). Designed and implemented an outlier analysis pipeline using Deep Isolation Forest (DIF), a deep-learning–based method for robust outlier detection. Identified key sources of data variability, including regional hotspots of outliers, MRI vendor discrepancies, and unaccounted framewise displacement, improving model accuracy.',
+      longDescription: 'Developed quantitative diagnostic metrics for neuropsychiatric disorders using machine learning and resting-state fMRI data from the Adolescent Brain Cognitive Development (ABCD) Study (12,000 participants), in collaboration with Drs. Margot Wagner and Alessandra Camassa. Designed and implemented an outlier analysis pipeline using Deep Isolation Forest (DIF), a deep-learning–based method for robust outlier detection.',
       date: 'Nov 2023 – May 2025',
       pi: 'Terrence Sejnowski, PhD',
       skills: ['Python', 'PyTorch', 'Deep Isolation Forest', 'fMRI', 'Statistics'],
@@ -138,7 +138,7 @@ export const nodes: PortfolioNode[] = [
   {
     id: 'dbs-electrode-segmentation',
     title: 'DBS Lead Segmentation',
-    shortDescription: '2D U-Net segmentation of multi-target deep brain stimulation lead trajectories on postoperative imaging. Manuscript submitted; to be released as a 3D Slicer extension for public use.',
+    shortDescription: '2D U-Net segmentation of multi-target deep brain stimulation lead trajectories on postoperative imaging. Manuscript in review; to be released as a 3D Slicer extension for public use.',
     type: 'project',
     tags: ['Deep Learning', 'Medical Imaging', 'PyTorch', 'U-Net'],
     href: '/project/dbs-electrode-segmentation',
@@ -164,7 +164,7 @@ export const nodes: PortfolioNode[] = [
   {
     id: 'qsm-reconstruction-pipeline',
     title: 'QSM Reconstruction Pipeline for DBS Neurosurgical Planning',
-    shortDescription: 'Modular framework for automated QSM integration into deep brain stimulation neurosurgical planning systems. Manuscript submitted; to be released on GitHub for public use.',
+    shortDescription: 'Modular framework for automated QSM integration into deep brain stimulation neurosurgical planning systems. Manuscript in review; to be released on GitHub for public use.',
     type: 'project',
     tags: ['Medical Imaging', 'QSM', 'Python', 'MRI'],
     href: '/project/qsm-reconstruction-pipeline',
@@ -294,7 +294,7 @@ export const nodes: PortfolioNode[] = [
     tags: ['Biotech', 'Assay Development', 'Analytical Chemistry'],
     href: '/project/weill-cornell-poster',
     detail: {
-      description: 'Develop and optimize radiotracers and antibody-based molecular imaging agents to advance cancer diagnosis and therapy.',
+      description: 'Develop and optimize radiotracers and antibody-based molecular imaging agents to advance cancer treatment.',
       longDescription: 'Conducted research under postdoctoral mentor Dr. Sai Sharma on HER2-targeting antibodies, studying how different levels of bioconjugation affect radiotracer synthesis and antibody immunoreactivity. Synthesized immunoconjugates by reacting trastuzumab with increasing molar excess of isothiocyanato-desferrioxamine (p-SCN-DFO), purified products via size-exclusion chromatography, and quantified DFO-to-antibody ratios. Found that while immunoreactivity remained stable even with 60-fold DFO excess, the association rate decreased compared to unconjugated trastuzumab, suggesting altered binding kinetics to the HER2 antigen, which could reduce therapeutic efficacy. Presented at the Weill Cornell Medicine Catalyst Program Poster Session, First Place Award.',
       date: 'June 2018 – Sep 2018',
       image: '/images/weill-cornell-poster.jpg',
